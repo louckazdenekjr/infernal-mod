@@ -1,5 +1,6 @@
 {
   "item.infernal-mod.example": "Example",
-  "block.infernal-mod.example_block": "Example Block",
+
+  "block.infernal-mod.bejeweled_deepslate": "Bejeweled Deepslate",
   "itemgroup.various": "Various"
 }

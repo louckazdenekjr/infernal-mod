@@ -16,8 +16,8 @@ import net.minecraft.util.Identifier;
 
 
 public class ModBlocks {
-    public static final Block EXAMPLE_BLOCK = registerBlock(
-            "example_block",
+    public static final Block BEJEWELED_DEEPSLATE = registerBlock(
+            "bejeweled_deepslate",
             new Block(FabricBlockSettings.of(Material.METAL).strength(4.0f).requiresTool()),
             ModItemGroup.VARIOUS
         );
