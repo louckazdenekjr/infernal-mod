@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -18,7 +19,7 @@ import net.minecraft.util.Identifier;
 public class ModBlocks {
     public static final Block BEJEWELED_DEEPSLATE = registerBlock(
             "bejeweled_deepslate",
-            new Block(FabricBlockSettings.of(Material.METAL).strength(4.0f).requiresTool()),
+            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)),
             ModItemGroup.VARIOUS
         );
 
