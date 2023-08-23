@@ -11,6 +11,7 @@ import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -20,7 +21,7 @@ public class ModBlocks {
     public static final Block BEJEWELED_DEEPSLATE = registerBlock(
             "bejeweled_deepslate",
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)),
-            ModItemGroup.VARIOUS
+            ItemGroups.BUILDING_BLOCKS
         );
 
 

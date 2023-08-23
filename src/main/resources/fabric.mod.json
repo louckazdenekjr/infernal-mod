@@ -16,18 +16,14 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"infernal.mod.InfernalMod"
+          "infernal.mod.InfernalMod"
 		],
-		"client": [
-			"infernal.mod.InfernalModClient"
+		"fabric-datagen": [
+			"infernal.mod.InfernalModDataGenerator"
 		]
 	},
 	"mixins": [
-		"infernal-mod.mixins.json",
-		{
-			"config": "infernal-mod.client.mixins.json",
-			"environment": "client"
-		}
+		"infernal-mod.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.22",

@@ -1,11 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "pattern": [
-    "###",
-    "#X#",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "minecraft:deepslate"
@@ -14,8 +9,13 @@
       "item": "minecraft:diamond"
     }
   },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
   "result": {
-    "item": "infernal-mod:bejeweled_deepslate",
-    "count": 4
-  }
+    "item": "infernal-mod:bejeweled_deepslate"
+  },
+  "show_notification": true
 }
