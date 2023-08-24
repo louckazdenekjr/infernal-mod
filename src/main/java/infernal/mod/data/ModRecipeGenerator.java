@@ -71,5 +71,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                         )
                 )
                 .offerTo(exporter);
+
+        // offer recipe for bejeweled sandstone
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CALCITE_BRICKS, 4)
+                .pattern("##")
+                .pattern("##")
+                .input('#', Items.CALCITE)
+                .criterion(FabricRecipeProvider.hasItem(Items.CALCITE), conditionsFromItem((Items.CALCITE))
+                )
+                .offerTo(exporter);
+
     }
 }

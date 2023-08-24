@@ -18,12 +18,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup arg) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.BEJEWELED_DEEPSLATE)
-                .add(ModBlocks.BEJEWELED_SANDSTONE);
-        //.add(ModBlocks.RUBY_BLOCK)
+                .add(ModBlocks.BEJEWELED_SANDSTONE)
+                .add(ModBlocks.CALCITE_BRICKS);
 
+        // wooden tool level is implied
+        // other tool levels assigned here
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.BEJEWELED_DEEPSLATE);
 
-        //.add(ModBlocks.RUBY_ORE);
     }
 }
