@@ -32,9 +32,16 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
-    // register bejeweled sandstone
+    // register calcite bricks
     public static final Block CALCITE_BRICKS = registerBlock(
             "calcite_bricks",
+            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
+            ItemGroups.BUILDING_BLOCKS
+    );
+
+    // register cracked calcite bricks
+    public static final Block CRACKED_CALCITE_BRICKS = registerBlock(
+            "cracked_calcite_bricks",
             new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
             ItemGroups.BUILDING_BLOCKS
     );

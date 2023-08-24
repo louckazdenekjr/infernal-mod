@@ -1,6 +1,7 @@
 package infernal.mod.data;
 
 
+import com.google.common.collect.Lists;
 import infernal.mod.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -13,13 +14,21 @@ import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.util.Util;
+
 import java.util.function.Consumer;
+import java.util.List;
+
 
 
 public class ModRecipeGenerator extends FabricRecipeProvider {
     public ModRecipeGenerator(FabricDataOutput output) {
         super(output);
     }
+
+    public static final List<ItemConvertible> CRACKED_CALCITE_BRICKS_PRE = Util.make(Lists.newArrayList(), list -> {
+        list.add(ModBlocks.CALCITE_BRICKS);
+    });
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
@@ -80,6 +89,16 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(Items.CALCITE), conditionsFromItem((Items.CALCITE))
                 )
                 .offerTo(exporter);
+
+        offerSmelting(
+                exporter,
+                CRACKED_CALCITE_BRICKS_PRE,
+                RecipeCategory.BUILDING_BLOCKS,
+                ModBlocks.CRACKED_CALCITE_BRICKS,
+                0.1f,
+                200,
+                "blocks"
+        ); // TODO: figure out what is the condition to get a smelting recipe in vanilla!
 
     }
 }

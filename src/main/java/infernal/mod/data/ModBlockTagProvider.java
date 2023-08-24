@@ -19,7 +19,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.BEJEWELED_DEEPSLATE)
                 .add(ModBlocks.BEJEWELED_SANDSTONE)
-                .add(ModBlocks.CALCITE_BRICKS);
+                .add(ModBlocks.CALCITE_BRICKS)
+                .add(ModBlocks.CRACKED_CALCITE_BRICKS);
 
         // wooden tool level is implied
         // other tool levels assigned here
