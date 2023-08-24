@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "minecraft:deepslate"
+      "item": "minecraft:cut_sandstone"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "item": "minecraft:redstone_block"
     }
   },
   "pattern": [
@@ -16,7 +16,7 @@
   ],
   "result": {
     "count": 4,
-    "item": "infernal-mod:bejeweled_deepslate"
+    "item": "infernal-mod:bejeweled_sandstone"
   },
   "show_notification": true
 }

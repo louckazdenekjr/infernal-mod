@@ -1,4 +1,7 @@
-// 1.19.4	2023-08-24T15:34:18.2573456	Infernal Mod/Model Definitions
+// 1.19.4	2023-08-24T21:52:14.6625721	Infernal Mod/Model Definitions
+3bb756a1d6d283b527bd7cdc261bd40170d54655 assets\infernal-mod\blockstates\bejeweled_sandstone.json
+360648a5a09d48424b866aa8dc6ff7d701bee42d assets\infernal-mod\models\item\bejeweled_sandstone.json
+a39711526fc1368917e838aec4ac5b11dc5fc93f assets\infernal-mod\models\block\bejeweled_sandstone.json
 966070546cea4fdecf6963fc464e9b24baa6a5a4 assets\infernal-mod\blockstates\bejeweled_deepslate.json
 6f1fe8d0ec83bb2365170bdfc80f4d7bffcadaf6 assets\infernal-mod\models\item\bejeweled_deepslate.json
 ea3ad2a9c45f08e5dda45909aea9b01e7b5ed5c0 assets\infernal-mod\models\block\bejeweled_deepslate.json

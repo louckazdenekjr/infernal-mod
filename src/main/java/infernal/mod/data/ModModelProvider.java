@@ -16,6 +16,8 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_DEEPSLATE);
+
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_SANDSTONE);
     }
 
     @Override

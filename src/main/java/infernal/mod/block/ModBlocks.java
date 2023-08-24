@@ -18,11 +18,19 @@ import net.minecraft.util.Identifier;
 
 
 public class ModBlocks {
+    // register bejeweled deepslate
     public static final Block BEJEWELED_DEEPSLATE = registerBlock(
             "bejeweled_deepslate",
             new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)),
             ItemGroups.BUILDING_BLOCKS
         );
+
+    // register bejeweled sandstone
+    public static final Block BEJEWELED_SANDSTONE = registerBlock(
+            "bejeweled_sandstone",
+            new Block(FabricBlockSettings.copyOf(Blocks.CUT_SANDSTONE)),
+            ItemGroups.BUILDING_BLOCKS
+    );
 
 
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
@@ -31,12 +39,10 @@ public class ModBlocks {
         return item;
     }
 
-
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         registerBlockItem(name, block, group);
         return Registry.register(Registries.BLOCK, new Identifier(InfernalMod.MOD_ID, name), block);
     }
-
 
     public static void registerModBlocks() {
         InfernalMod.LOGGER.info("Registering ModBlocks");

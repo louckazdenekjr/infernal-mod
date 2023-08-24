@@ -20,6 +20,7 @@ public class ModItems {
 
 
     private static Item registerItem(String name, Item item) {
+        // register an item
         return Registry.register(Registries.ITEM, new Identifier(InfernalMod.MOD_ID, name), item);
     }
 

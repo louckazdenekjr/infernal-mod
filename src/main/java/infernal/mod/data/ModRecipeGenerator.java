@@ -4,8 +4,6 @@ package infernal.mod.data;
 import infernal.mod.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.advancement.criterion.Criterion;
-import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -15,9 +13,6 @@ import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.util.Identifier;
-
-import java.util.List;
 import java.util.function.Consumer;
 
 
@@ -35,7 +30,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
         //        ModBlocks.CITRINE_BLOCK);
 
         // offer recipe for bejeweled deepslate
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_DEEPSLATE)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_DEEPSLATE, 4)
             .pattern("###")
             .pattern("#X#")
             .pattern("###")
@@ -55,7 +50,26 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 )
             )
             .offerTo(exporter);
+
+        // offer recipe for bejeweled sandstone
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_SANDSTONE, 4)
+                .pattern("###")
+                .pattern("#X#")
+                .pattern("###")
+                .input('#', Items.CUT_SANDSTONE)
+                .input('X', Items.REDSTONE_BLOCK)
+                .criterion(FabricRecipeProvider.hasItem(Items.CUT_SANDSTONE),
+                        new InventoryChangedCriterion.Conditions(
+                                EntityPredicate.Extended.EMPTY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                new ItemPredicate[]{
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.CUT_SANDSTONE}).count(NumberRange.IntRange.ANY).build(),
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.REDSTONE_BLOCK}).count(NumberRange.IntRange.ANY).build()
+                                }
+                        )
+                )
+                .offerTo(exporter);
     }
 }
-// conditions container?
-// data type for list of item predicates

@@ -12,10 +12,9 @@ import net.minecraft.util.Identifier;
 public class ModItemGroup {
     public static ItemGroup VARIOUS;
 
-
     public static void registerItemGroups() {
-        VARIOUS = FabricItemGroup.builder(new Identifier(InfernalMod.MOD_ID, "example"))
-                .displayName(Text.translatable("itemgroup.various"))
-                .icon(() -> new ItemStack(ModBlocks.BEJEWELED_DEEPSLATE)).build();
+        //VARIOUS = FabricItemGroup.builder(new Identifier(InfernalMod.MOD_ID, "example"))
+        //        .displayName(Text.translatable("itemgroup.various"))
+        //        .icon(() -> new ItemStack(ModBlocks.BEJEWELED_DEEPSLATE)).build();
     }
 }
