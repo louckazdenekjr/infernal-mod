@@ -46,6 +46,12 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
+    // register bejeweled calcite bricks
+    public static final Block BEJEWELED_CALCITE_BRICKS = registerBlock(
+            "bejeweled_calcite_bricks",
+            new Block(FabricBlockSettings.copyOf(CALCITE_BRICKS)),
+            ItemGroups.BUILDING_BLOCKS
+    );
 
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
         Item item = Registry.register(Registries.ITEM, new Identifier(InfernalMod.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));

@@ -20,7 +20,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.BEJEWELED_DEEPSLATE)
                 .add(ModBlocks.BEJEWELED_SANDSTONE)
                 .add(ModBlocks.CALCITE_BRICKS)
-                .add(ModBlocks.CRACKED_CALCITE_BRICKS);
+                .add(ModBlocks.CRACKED_CALCITE_BRICKS)
+                .add(ModBlocks.BEJEWELED_CALCITE_BRICKS);
 
         // wooden tool level is implied
         // other tool levels assigned here

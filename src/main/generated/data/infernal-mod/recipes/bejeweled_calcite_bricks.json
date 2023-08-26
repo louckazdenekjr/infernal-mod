@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "infernal-mod:calcite_bricks"
+    },
+    "X": {
+      "item": "minecraft:amethyst_block"
+    }
+  },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "infernal-mod:bejeweled_calcite_bricks"
+  },
+  "show_notification": true
+}

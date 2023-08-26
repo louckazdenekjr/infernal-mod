@@ -100,5 +100,27 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 "blocks"
         ); // TODO: figure out what is the condition to get a smelting recipe in vanilla!
 
+
+        // offer recipe for bejeweled sandstone
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_CALCITE_BRICKS, 4)
+                .pattern("###")
+                .pattern("#X#")
+                .pattern("###")
+                .input('#', ModBlocks.CALCITE_BRICKS)
+                .input('X', Items.AMETHYST_BLOCK)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.CALCITE_BRICKS),
+                        new InventoryChangedCriterion.Conditions(
+                                EntityPredicate.Extended.EMPTY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                new ItemPredicate[]{
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{ModBlocks.CALCITE_BRICKS}).count(NumberRange.IntRange.ANY).build(),
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.AMETHYST_BLOCK}).count(NumberRange.IntRange.ANY).build()
+                                }
+                        )
+                )
+                .offerTo(exporter);
+
     }
 }
