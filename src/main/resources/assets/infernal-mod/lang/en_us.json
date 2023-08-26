@@ -4,5 +4,8 @@
   "block.infernal-mod.bejeweled_sandstone": "Bejeweled Sandstone",
   "block.infernal-mod.calcite_bricks": "Calcite Bricks",
   "block.infernal-mod.cracked_calcite_bricks": "Cracked Calcite Bricks",
-  "block.infernal-mod.bejeweled_calcite_bricks": "Bejeweled Calcite Bricks"
+  "block.infernal-mod.bejeweled_calcite_bricks": "Bejeweled Calcite Bricks",
+  "block.infernal-mod.bejeweled_stone_bricks": "Bejeweled Stone Bricks",
+  "block.infernal-mod.polished_terracotta": "Polished Terracotta",
+  "block.infernal-mod.bejeweled_terracotta": "Bejeweled Terracotta"
 }

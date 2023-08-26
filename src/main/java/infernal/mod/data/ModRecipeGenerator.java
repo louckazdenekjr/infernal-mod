@@ -6,6 +6,7 @@ import infernal.mod.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
@@ -16,19 +17,18 @@ import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Util;
 
-import java.util.function.Consumer;
 import java.util.List;
-
+import java.util.function.Consumer;
 
 
 public class ModRecipeGenerator extends FabricRecipeProvider {
-    public ModRecipeGenerator(FabricDataOutput output) {
-        super(output);
-    }
-
     public static final List<ItemConvertible> CRACKED_CALCITE_BRICKS_PRE = Util.make(Lists.newArrayList(), list -> {
         list.add(ModBlocks.CALCITE_BRICKS);
     });
+
+    public ModRecipeGenerator(FabricDataOutput output) {
+        super(output);
+    }
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
@@ -40,25 +40,25 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
 
         // offer recipe for bejeweled deepslate
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_DEEPSLATE, 4)
-            .pattern("###")
-            .pattern("#X#")
-            .pattern("###")
-            .input('#', Items.DEEPSLATE)
-            .input('X', Items.DIAMOND)
-            .criterion(FabricRecipeProvider.hasItem(Items.DEEPSLATE),
-                //CriterionConditions()
-                new InventoryChangedCriterion.Conditions(
-                    EntityPredicate.Extended.EMPTY,
-                    NumberRange.IntRange.ANY,
-                    NumberRange.IntRange.ANY,
-                    NumberRange.IntRange.ANY,
-                    new ItemPredicate[]{
-                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.DEEPSLATE}).count(NumberRange.IntRange.ANY).build(),
-                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.DIAMOND}).count(NumberRange.IntRange.ANY).build()
-                    }
+                .pattern("###")
+                .pattern("#X#")
+                .pattern("###")
+                .input('#', Items.POLISHED_DEEPSLATE)
+                .input('X', Items.DIAMOND)
+                .criterion(FabricRecipeProvider.hasItem(Items.DEEPSLATE),
+                        //CriterionConditions()
+                        new InventoryChangedCriterion.Conditions(
+                                EntityPredicate.Extended.EMPTY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                new ItemPredicate[]{
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.DEEPSLATE}).count(NumberRange.IntRange.ANY).build(),
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.DIAMOND}).count(NumberRange.IntRange.ANY).build()
+                                }
+                        )
                 )
-            )
-            .offerTo(exporter);
+                .offerTo(exporter);
 
         // offer recipe for bejeweled sandstone
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_SANDSTONE, 4)
@@ -81,13 +81,12 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 )
                 .offerTo(exporter);
 
-        // offer recipe for bejeweled sandstone
+        // offer recipe for calcite bricks
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CALCITE_BRICKS, 4)
                 .pattern("##")
                 .pattern("##")
                 .input('#', Items.CALCITE)
-                .criterion(FabricRecipeProvider.hasItem(Items.CALCITE), conditionsFromItem((Items.CALCITE))
-                )
+                .criterion(FabricRecipeProvider.hasItem(Items.CALCITE), conditionsFromItem((Items.CALCITE)))
                 .offerTo(exporter);
 
         offerSmelting(
@@ -98,10 +97,9 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 0.1f,
                 200,
                 "blocks"
-        ); // TODO: figure out what is the condition to get a smelting recipe in vanilla!
+        );
 
-
-        // offer recipe for bejeweled sandstone
+        // offer recipe for bejeweled calcite bricks
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_CALCITE_BRICKS, 4)
                 .pattern("###")
                 .pattern("#X#")
@@ -122,5 +120,60 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 )
                 .offerTo(exporter);
 
+        // offer recipe for bejeweled stone bricks
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_STONE_BRICKS, 4)
+                .pattern("###")
+                .pattern("#X#")
+                .pattern("###")
+                .input('#', Blocks.CHISELED_STONE_BRICKS)
+                .input('X', Items.LAPIS_BLOCK)
+                .criterion(FabricRecipeProvider.hasItem(Blocks.CHISELED_STONE_BRICKS),
+                        new InventoryChangedCriterion.Conditions(
+                                EntityPredicate.Extended.EMPTY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                new ItemPredicate[]{
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Blocks.CHISELED_STONE_BRICKS}).count(NumberRange.IntRange.ANY).build(),
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.LAPIS_BLOCK}).count(NumberRange.IntRange.ANY).build()
+                                }
+                        )
+                )
+                .offerTo(exporter);
+
+        // offer recipe for polished terracota
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_TERRACOTTA, 4)
+                .pattern("##")
+                .pattern("##")
+                .input('#', Blocks.TERRACOTTA)
+                .criterion(FabricRecipeProvider.hasItem(Items.TERRACOTTA), conditionsFromItem((Items.TERRACOTTA)))
+                .offerTo(exporter);
+
+        // offer recipe for bejeweled stone bricks
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_TERRACOTTA, 4)
+                .pattern("###")
+                .pattern("#X#")
+                .pattern("###")
+                .input('#', ModBlocks.POLISHED_TERRACOTTA)
+                .input('X', Items.EMERALD)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.POLISHED_TERRACOTTA),
+                        new InventoryChangedCriterion.Conditions(
+                                EntityPredicate.Extended.EMPTY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                NumberRange.IntRange.ANY,
+                                new ItemPredicate[]{
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{ModBlocks.POLISHED_TERRACOTTA}).count(NumberRange.IntRange.ANY).build(),
+                                        ItemPredicate.Builder.create().items(new ItemConvertible[]{Items.EMERALD}).count(NumberRange.IntRange.ANY).build()
+                                }
+                        )
+                )
+                .offerTo(exporter);
+
     }
 }
+
+// TODO: debug bejeweled terractora recipe unlock / advancement - first item crafted from modblocks
+
+// TODO: figure out what is the condition to get a smelting recipe in vanilla!
+// TODO: hi-res for bej stone bricks and others

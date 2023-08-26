@@ -19,6 +19,9 @@ public class ModLootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.CALCITE_BRICKS);
         addDrop(ModBlocks.CRACKED_CALCITE_BRICKS);
         addDrop(ModBlocks.BEJEWELED_CALCITE_BRICKS);
+        addDrop(ModBlocks.BEJEWELED_STONE_BRICKS);
+        addDrop(ModBlocks.POLISHED_TERRACOTTA);
+        addDrop(ModBlocks.BEJEWELED_TERRACOTTA);
 
         // with and without silk touch
         //addDrop(ModBlocks.CITRINE_ORE, oreDrops(ModBlocks.CITRINE_ORE, ModItems.RAW_CITRINE));

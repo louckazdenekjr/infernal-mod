@@ -1,13 +1,11 @@
 package infernal.mod.block;
 
 import infernal.mod.InfernalMod;
-import infernal.mod.item.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -21,7 +19,7 @@ public class ModBlocks {
     // register bejeweled deepslate
     public static final Block BEJEWELED_DEEPSLATE = registerBlock(
             "bejeweled_deepslate",
-            new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)),
+            new Block(FabricBlockSettings.copyOf(Blocks.POLISHED_DEEPSLATE)),
             ItemGroups.BUILDING_BLOCKS
         );
 
@@ -42,7 +40,7 @@ public class ModBlocks {
     // register cracked calcite bricks
     public static final Block CRACKED_CALCITE_BRICKS = registerBlock(
             "cracked_calcite_bricks",
-            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
+            new Block(FabricBlockSettings.copyOf(ModBlocks.CALCITE_BRICKS)),
             ItemGroups.BUILDING_BLOCKS
     );
 
@@ -52,6 +50,28 @@ public class ModBlocks {
             new Block(FabricBlockSettings.copyOf(CALCITE_BRICKS)),
             ItemGroups.BUILDING_BLOCKS
     );
+
+    // register bejeweled stone bricks
+    public static final Block BEJEWELED_STONE_BRICKS = registerBlock(
+            "bejeweled_stone_bricks",
+            new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)),
+            ItemGroups.BUILDING_BLOCKS
+    );
+
+    // register bejeweled bejeweled terracota
+    public static final Block POLISHED_TERRACOTTA = registerBlock(
+            "polished_terracotta",
+            new Block(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)),
+            ItemGroups.BUILDING_BLOCKS
+    );
+
+    // register bejeweled bejeweled terracota
+    public static final Block BEJEWELED_TERRACOTTA = registerBlock(
+            "bejeweled_terracotta",
+            new Block(FabricBlockSettings.copyOf(POLISHED_TERRACOTTA)),
+            ItemGroups.BUILDING_BLOCKS
+    );
+
 
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
         Item item = Registry.register(Registries.ITEM, new Identifier(InfernalMod.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));

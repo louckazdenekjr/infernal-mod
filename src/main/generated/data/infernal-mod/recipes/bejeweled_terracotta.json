@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "minecraft:polished_deepslate"
+      "item": "infernal-mod:polished_terracotta"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "item": "minecraft:emerald"
     }
   },
   "pattern": [
@@ -16,7 +16,7 @@
   ],
   "result": {
     "count": 4,
-    "item": "infernal-mod:bejeweled_deepslate"
+    "item": "infernal-mod:bejeweled_terracotta"
   },
   "show_notification": true
 }

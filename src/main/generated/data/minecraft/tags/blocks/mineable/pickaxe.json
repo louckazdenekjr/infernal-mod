@@ -5,6 +5,9 @@
     "infernal-mod:bejeweled_sandstone",
     "infernal-mod:calcite_bricks",
     "infernal-mod:cracked_calcite_bricks",
-    "infernal-mod:bejeweled_calcite_bricks"
+    "infernal-mod:bejeweled_calcite_bricks",
+    "infernal-mod:bejeweled_stone_bricks",
+    "infernal-mod:polished_terracotta",
+    "infernal-mod:bejeweled_terracotta"
   ]
 }

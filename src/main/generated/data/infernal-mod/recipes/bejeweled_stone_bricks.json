@@ -3,10 +3,10 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "minecraft:polished_deepslate"
+      "item": "minecraft:chiseled_stone_bricks"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "item": "minecraft:lapis_block"
     }
   },
   "pattern": [
@@ -16,7 +16,7 @@
   ],
   "result": {
     "count": 4,
-    "item": "infernal-mod:bejeweled_deepslate"
+    "item": "infernal-mod:bejeweled_stone_bricks"
   },
   "show_notification": true
 }
