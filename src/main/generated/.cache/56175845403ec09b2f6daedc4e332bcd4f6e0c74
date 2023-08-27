@@ -1,4 +1,4 @@
-// 1.19.4	2023-08-26T23:07:56.2878886	Infernal Mod/Recipes
+// 1.19.4	2023-08-27T14:01:31.3837977	Infernal Mod/Recipes
 c90c82facc8ecd37e6f9078fd57bd65e0a349e01 data\infernal-mod\advancements\recipes\building_blocks\calcite_bricks.json
 397faede59e1666bb20a63d30d419f5cbe0ba7c1 data\infernal-mod\recipes\bejeweled_calcite_bricks.json
 7c30adcb37d0b4eccfd2bfe7d7cd111d2e1567f9 data\infernal-mod\recipes\bejeweled_sandstone.json
@@ -10,7 +10,9 @@ a7994a3d3fa7e123e6f0ea24ca7a971faf7c7f81 data\infernal-mod\advancements\recipes\
 9dc74371d12b464173fce0de62ae137cd518f463 data\infernal-mod\recipes\bejeweled_terracotta.json
 19e2c063dde3798e2811651bf1aa97b36a93085c data\infernal-mod\advancements\recipes\building_blocks\cracked_calcite_bricks_from_smelting_calcite_bricks.json
 5884118bc8e4531867a63ce4e059621eb92c37c6 data\infernal-mod\advancements\recipes\building_blocks\bejeweled_terracotta.json
+f09bf5db980572d7bab87ca5b2fce70f46bf109d data\infernal-mod\recipes\polished_calcite.json
 2d03b9f38c84ab47545f408733ed4bdcb8ca4ccc data\infernal-mod\advancements\recipes\building_blocks\bejeweled_calcite_bricks.json
+e6d3bf0f9158716b845880cdc6d5d95b11284851 data\infernal-mod\advancements\recipes\building_blocks\polished_calcite.json
 bab760fabbd0c6c825cf41230cecd6b5976c1172 data\infernal-mod\advancements\recipes\building_blocks\bejeweled_sandstone.json
 6887756f4ccd7abc6affc47e88f7e993fa953b33 data\infernal-mod\recipes\bejeweled_deepslate.json
 663d3b4b66062a146528f31d1e27f13b3390c905 data\infernal-mod\recipes\calcite_bricks.json

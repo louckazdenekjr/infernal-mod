@@ -72,6 +72,13 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
+    // register polished calcite
+    public static final Block POLISHED_CALCITE = registerBlock(
+            "polished_calcite",
+            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
+            ItemGroups.BUILDING_BLOCKS
+    );
+
 
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
         Item item = Registry.register(Registries.ITEM, new Identifier(InfernalMod.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));

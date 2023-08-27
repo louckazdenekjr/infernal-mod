@@ -1,9 +1,10 @@
-// 1.19.4	2023-08-26T23:07:56.2913604	Infernal Mod/Block Loot Tables
+// 1.19.4	2023-08-27T14:01:31.387764	Infernal Mod/Block Loot Tables
 85656713d6dce9eb2dd36a42b1ae7fd6de09b631 data\infernal-mod\loot_tables\blocks\bejeweled_terracotta.json
-19236d0df43a5d307261767218f027ac968ef707 data\infernal-mod\loot_tables\blocks\bejeweled_calcite_bricks.json
 8dd7e52baa187616a606686014d4554d617eb5a0 data\infernal-mod\loot_tables\blocks\cracked_calcite_bricks.json
+19236d0df43a5d307261767218f027ac968ef707 data\infernal-mod\loot_tables\blocks\bejeweled_calcite_bricks.json
+5c59e561a170c0a67bcfc1aa59bd77302799b26e data\infernal-mod\loot_tables\blocks\polished_calcite.json
 6f5c04920a7091eb8bf1955bade49a28a2c91991 data\infernal-mod\loot_tables\blocks\bejeweled_stone_bricks.json
 0245355744a9f1237d5beb10827f574f500cb127 data\infernal-mod\loot_tables\blocks\bejeweled_deepslate.json
 409c1e2d46c55d41e355b7feee9ed4f091265fd5 data\infernal-mod\loot_tables\blocks\polished_terracotta.json
-f17c8bc5f38f038744143d13339bcb7491c96c8f data\infernal-mod\loot_tables\blocks\bejeweled_sandstone.json
 561ba82cb2d2ca19a409241ce1bb66396d4d4d15 data\infernal-mod\loot_tables\blocks\calcite_bricks.json
+f17c8bc5f38f038744143d13339bcb7491c96c8f data\infernal-mod\loot_tables\blocks\bejeweled_sandstone.json

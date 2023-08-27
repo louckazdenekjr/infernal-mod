@@ -141,7 +141,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 )
                 .offerTo(exporter);
 
-        // offer recipe for polished terracota
+        // offer recipe for polished terracotta
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_TERRACOTTA, 4)
                 .pattern("##")
                 .pattern("##")
@@ -149,7 +149,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(FabricRecipeProvider.hasItem(Items.TERRACOTTA), conditionsFromItem((Items.TERRACOTTA)))
                 .offerTo(exporter);
 
-        // offer recipe for bejeweled stone bricks
+        // offer recipe for bejeweled terracotta
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BEJEWELED_TERRACOTTA, 4)
                 .pattern("###")
                 .pattern("#X#")
@@ -168,6 +168,14 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                                 }
                         )
                 )
+                .offerTo(exporter);
+
+        // offer recipe for polished calcite
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_CALCITE, 4)
+                .pattern("##")
+                .pattern("##")
+                .input('#', Blocks.CALCITE)
+                .criterion(FabricRecipeProvider.hasItem(Items.CALCITE), conditionsFromItem((Items.CALCITE)))
                 .offerTo(exporter);
 
     }
