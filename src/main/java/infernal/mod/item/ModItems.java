@@ -12,12 +12,10 @@ import net.minecraft.util.Identifier;
 
 
 public class ModItems {
-    /*
-    public static final Item EXAMPLE = registerItem("example",
+    public static final Item HANDBELL = registerItem(
+            "handbell",
             new Item(new FabricItemSettings())
     );
-    */
-
 
     private static Item registerItem(String name, Item item) {
         // register an item
@@ -28,6 +26,7 @@ public class ModItems {
     public static void addItemsToItemGroup() {
         //addToItemGroup(ItemGroups.INGREDIENTS, EXAMPLE);
         //addToItemGroup(ModItemGroup.VARIOUS, EXAMPLE);
+        addToItemGroup(ItemGroups.TOOLS, HANDBELL);
     }
 
 
