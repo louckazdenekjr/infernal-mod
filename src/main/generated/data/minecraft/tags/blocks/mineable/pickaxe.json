@@ -3,12 +3,12 @@
   "values": [
     "infernal-mod:bejeweled_deepslate",
     "infernal-mod:bejeweled_sandstone",
+    "infernal-mod:polished_calcite",
     "infernal-mod:calcite_bricks",
     "infernal-mod:cracked_calcite_bricks",
     "infernal-mod:bejeweled_calcite_bricks",
     "infernal-mod:bejeweled_stone_bricks",
     "infernal-mod:polished_terracotta",
-    "infernal-mod:bejeweled_terracotta",
-    "infernal-mod:polished_calcite"
+    "infernal-mod:bejeweled_terracotta"
   ]
 }

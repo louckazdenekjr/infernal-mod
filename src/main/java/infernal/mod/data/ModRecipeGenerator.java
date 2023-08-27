@@ -85,8 +85,8 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CALCITE_BRICKS, 4)
                 .pattern("##")
                 .pattern("##")
-                .input('#', Items.CALCITE)
-                .criterion(FabricRecipeProvider.hasItem(Items.CALCITE), conditionsFromItem((Items.CALCITE)))
+                .input('#', ModBlocks.POLISHED_CALCITE)
+                .criterion(FabricRecipeProvider.hasItem(ModBlocks.POLISHED_CALCITE), conditionsFromItem((ModBlocks.POLISHED_CALCITE)))
                 .offerTo(exporter);
 
         offerSmelting(
@@ -180,8 +180,6 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
 
     }
 }
-
-// TODO: debug bejeweled terractora recipe unlock / advancement - first item crafted from modblocks
 
 // TODO: figure out what is the condition to get a smelting recipe in vanilla!
 // TODO: hi-res for bej stone bricks and others

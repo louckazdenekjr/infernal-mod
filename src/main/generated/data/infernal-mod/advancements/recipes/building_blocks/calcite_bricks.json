@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_calcite": {
+    "has_polished_calcite": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:calcite"
+              "infernal-mod:polished_calcite"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_calcite",
+      "has_polished_calcite",
       "has_the_recipe"
     ]
   ],

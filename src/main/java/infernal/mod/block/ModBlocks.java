@@ -30,10 +30,17 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
+    // register polished calcite
+    public static final Block POLISHED_CALCITE = registerBlock(
+            "polished_calcite",
+            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
+            ItemGroups.BUILDING_BLOCKS
+    );
+
     // register calcite bricks
     public static final Block CALCITE_BRICKS = registerBlock(
             "calcite_bricks",
-            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
+            new Block(FabricBlockSettings.copyOf(ModBlocks.POLISHED_CALCITE)),
             ItemGroups.BUILDING_BLOCKS
     );
 
@@ -72,12 +79,6 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
-    // register polished calcite
-    public static final Block POLISHED_CALCITE = registerBlock(
-            "polished_calcite",
-            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
-            ItemGroups.BUILDING_BLOCKS
-    );
 
 
     private static Item registerBlockItem(String name, Block block, ItemGroup group) {
