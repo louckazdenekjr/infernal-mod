@@ -31,31 +31,13 @@ public class HandbellSummoningGoal
     @Override
     public boolean canStart() {
         BlockPos blockPos;
-        if (!this.isInDanger()) {
-            return true;
-        }
-        if (this.mob.isOnFire() && (blockPos = this.locateClosestWater(this.mob.world, this.mob, 5)) != null) {
-            this.targetX = blockPos.getX();
-            this.targetY = blockPos.getY();
-            this.targetZ = blockPos.getZ();
-            return true;
-        }
-        return this.findTarget();
-    }
 
-    protected boolean isInDanger() {
-        return this.mob.getAttacker() != null || this.mob.shouldEscapePowderSnow() || this.mob.isOnFire();
-    }
+        blockPos = this.locateClosestWater(this.mob.world, this.mob, 5);
+        this.targetX = blockPos.getX();
+        this.targetY = blockPos.getY();
+        this.targetZ = blockPos.getZ();
+        return false;
 
-    protected boolean findTarget() {
-        Vec3d vec3d = NoPenaltyTargeting.find(this.mob, 5, 4);
-        if (vec3d == null) {
-            return false;
-        }
-        this.targetX = vec3d.x;
-        this.targetY = vec3d.y;
-        this.targetZ = vec3d.z;
-        return true;
     }
 
     public boolean isActive() {

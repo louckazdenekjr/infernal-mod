@@ -1,6 +1,7 @@
 package infernal.mod.item.custom;
 
 import infernal.mod.entity.ai.goal.HandbellSummoningGoal;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -59,9 +60,10 @@ public class HandbellItem extends Item {
 
                 // this needs to be last, cuz java no likey
                 for (int i = 0; i <= entities.size(); i++) {
-                    if (entities.get(i) instanceof TameableEntity target) {
-                        HandbellSummoningGoal summoningGoal = new HandbellSummoningGoal(target, 2.0));
-                        target.goalSelector.add(1, summoningGoal);
+                    if (entities.get(i) instanceof PathAwareEntity target) {
+                        //HandbellSummoningGoal summoningGoal = new HandbellSummoningGoal(target, 2.0));
+                        //target.goalSelector.add(1, summoningGoal);
+                        target.getNavigation().startMovingTo(user, 1.25);
 
                         //target_tameable.setInSittingPose(true);
                     }
