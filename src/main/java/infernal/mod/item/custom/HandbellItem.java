@@ -1,7 +1,7 @@
 package infernal.mod.item.custom;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.CatEntity;
+import infernal.mod.entity.ai.goal.HandbellSummoningGoal;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -42,7 +42,7 @@ public class HandbellItem extends Item {
             } else {
                 // server side
                 ArrayList entities = (ArrayList) world.getEntitiesByType(
-                        TypeFilter.instanceOf(CatEntity.class),
+                        TypeFilter.instanceOf(TameableEntity.class),
                         new Box(
                                 user.getX() - 32,
                                 user.getY() - 32,
@@ -55,18 +55,25 @@ public class HandbellItem extends Item {
                 );
 
                 // report entity count
-                user.sendMessage(Text.literal("Found " + entities.size() + " cats!"), true);
+                user.sendMessage(Text.literal("Found " + entities.size() + " tameable entities!"), true);
 
                 // this needs to be last, cuz java no likey
                 for (int i = 0; i <= entities.size(); i++) {
-                    Entity target = (Entity) entities.get(i);
-                    if (target instanceof TameableEntity target_tameable) {
-                        target_tameable.setOnFire(true);
-                            //target_tameable.setInSittingPose(true);
+                    if (entities.get(i) instanceof TameableEntity target) {
+                        HandbellSummoningGoal summoningGoal = new HandbellSummoningGoal(
+                                target,
+                                2.0
+                                );
+                        target.goalSelector.add(
+                                10,
+                                summoningGoal
+                        );
+
+
+                        //target_tameable.setInSittingPose(true);
                     }
                 }
             }
-
 
         }
 
