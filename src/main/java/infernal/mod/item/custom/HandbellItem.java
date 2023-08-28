@@ -1,7 +1,5 @@
 package infernal.mod.item.custom;
 
-import infernal.mod.entity.ai.goal.HandbellSummoningGoal;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -10,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypeFilter;
 import net.minecraft.util.TypedActionResult;
@@ -55,17 +52,11 @@ public class HandbellItem extends Item {
                         EntityPredicates.VALID_ENTITY
                 );
 
-                // report entity count
-                user.sendMessage(Text.literal("Found " + entities.size() + " tameable entities!"), true);
-
                 // this needs to be last, cuz java no likey
                 for (int i = 0; i <= entities.size(); i++) {
                     if (entities.get(i) instanceof PathAwareEntity target) {
-                        //HandbellSummoningGoal summoningGoal = new HandbellSummoningGoal(target, 2.0));
-                        //target.goalSelector.add(1, summoningGoal);
+                        //if ((TameableEntity) target.isTa)
                         target.getNavigation().startMovingTo(user, 1.25);
-
-                        //target_tameable.setInSittingPose(true);
                     }
                 }
             }
