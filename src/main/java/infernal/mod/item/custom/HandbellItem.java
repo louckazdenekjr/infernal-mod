@@ -1,7 +1,6 @@
 package infernal.mod.item.custom;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -42,30 +41,28 @@ public class HandbellItem extends Item {
                 user.playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
             } else {
                 // server side
-                if (!isCoolingDown) { // if ready
-                    ArrayList entities = (ArrayList) world.getEntitiesByType(
-                            TypeFilter.instanceOf(CatEntity.class),
-                            new Box(
-                                    user.getX() - 32,
-                                    user.getY() - 32,
-                                    user.getZ() - 32,
-                                    user.getX() + 32,
-                                    user.getY() + 32,
-                                    user.getZ() + 32
-                            ),
-                            EntityPredicates.VALID_ENTITY
-                    );
+                ArrayList entities = (ArrayList) world.getEntitiesByType(
+                        TypeFilter.instanceOf(CatEntity.class),
+                        new Box(
+                                user.getX() - 32,
+                                user.getY() - 32,
+                                user.getZ() - 32,
+                                user.getX() + 32,
+                                user.getY() + 32,
+                                user.getZ() + 32
+                        ),
+                        EntityPredicates.VALID_ENTITY
+                );
 
-                    // report entity count
-                    user.sendMessage(Text.literal("Found " + entities.size() + " cats!"), true);
+                // report entity count
+                user.sendMessage(Text.literal("Found " + entities.size() + " cats!"), true);
 
-                    // this needs to be last, cuz java no likey
-                    for (int i = 0; i <= entities.size(); i++) {
-                        Entity target = (Entity) entities.get(i);
-                        if (target instanceof TameableEntity) {
-                                TameableEntity target_tameable =  (TameableEntity) target;
-                                target_tameable.setInSittingPose(true);
-                        }
+                // this needs to be last, cuz java no likey
+                for (int i = 0; i <= entities.size(); i++) {
+                    Entity target = (Entity) entities.get(i);
+                    if (target instanceof TameableEntity target_tameable) {
+                        target_tameable.setOnFire(true);
+                            //target_tameable.setInSittingPose(true);
                     }
                 }
             }
