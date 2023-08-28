@@ -68,3 +68,5 @@ public class HandbellItem extends Item {
     }
 
 }
+
+// TODO: check if the bell sound is heard by other players, compare to vanilla instruments
