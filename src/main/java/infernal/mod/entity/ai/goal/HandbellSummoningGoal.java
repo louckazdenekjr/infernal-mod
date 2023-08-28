@@ -32,7 +32,7 @@ public class HandbellSummoningGoal
     public boolean canStart() {
         BlockPos blockPos;
         if (!this.isInDanger()) {
-            return false;
+            return true;
         }
         if (this.mob.isOnFire() && (blockPos = this.locateClosestWater(this.mob.world, this.mob, 5)) != null) {
             this.targetX = blockPos.getX();

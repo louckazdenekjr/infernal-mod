@@ -60,15 +60,8 @@ public class HandbellItem extends Item {
                 // this needs to be last, cuz java no likey
                 for (int i = 0; i <= entities.size(); i++) {
                     if (entities.get(i) instanceof TameableEntity target) {
-                        HandbellSummoningGoal summoningGoal = new HandbellSummoningGoal(
-                                target,
-                                2.0
-                                );
-                        target.goalSelector.add(
-                                10,
-                                summoningGoal
-                        );
-
+                        HandbellSummoningGoal summoningGoal = new HandbellSummoningGoal(target, 2.0));
+                        target.goalSelector.add(1, summoningGoal);
 
                         //target_tameable.setInSittingPose(true);
                     }
