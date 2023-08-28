@@ -66,7 +66,6 @@ public class HandbellItem extends Item {
                                 TameableEntity target_tameable =  (TameableEntity) target;
                                 target_tameable.setInSittingPose(true);
                         }
-                        
                     }
                 }
             }
