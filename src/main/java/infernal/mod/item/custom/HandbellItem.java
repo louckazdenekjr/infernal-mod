@@ -1,6 +1,8 @@
 package infernal.mod.item.custom;
 
+import infernal.mod.sound.ModSoundEvents;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,7 +38,8 @@ public class HandbellItem extends Item {
             if (world.isClient) {
                 // client side
                 // play sound effect
-                user.playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
+                //user.playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
+                user.playSound(ModSoundEvents.HANDBELL_RINGING, 1.0f, 1.0f);
             } else {
                 // server side
                 ArrayList entities = (ArrayList) world.getEntitiesByType(
@@ -54,9 +57,14 @@ public class HandbellItem extends Item {
 
                 // this needs to be last, cuz java no likey
                 for (int i = 0; i <= entities.size(); i++) {
-                    if (entities.get(i) instanceof PathAwareEntity target) {
-                        //if ((TameableEntity) target.isTa)
-                        target.getNavigation().startMovingTo(user, 1.25);
+                    if (entities.get(i) instanceof TameableEntity tEntity) {
+                        if (tEntity.getOwner() == user) {
+                            if (tEntity.isSitting()) {
+                                tEntity.setSitting(false);
+                                tEntity.setInSittingPose(false);
+                            }
+                            tEntity.getNavigation().startMovingTo(user, 1.25);
+                        }
                     }
                 }
             }

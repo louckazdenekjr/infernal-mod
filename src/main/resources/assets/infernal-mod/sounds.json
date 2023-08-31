@@ -1,0 +1,8 @@
+{
+  "handbell_ringing": {
+    "subtitle": "subtitles.infernal-mod.handbell_ringing",
+    "sounds": [
+      "infernal-mod:handbell_ringing"
+    ]
+  }
+}
