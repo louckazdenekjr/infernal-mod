@@ -1,18 +1,30 @@
 package infernal.mod.block;
 
-import infernal.mod.InfernalMod;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.block.*;
+import net.minecraft.block.enums.BlockHalf;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
+
+import static infernal.mod.InfernalMod.*;
 
 
 public class ModBlocks {
@@ -79,20 +91,100 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
+    /*
+    // register transporter
+    public static final SlabBlock TRANSPORTER = (SlabBlock) registerBlock(
+            "transporter",
+            new SlabBlock(FabricBlockSettings.of(Material.METAL)),
+            // TODO: after implementing cursed steel, change this material
+            ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
+    );
+    */
 
+    public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlock(
+            "transporter",
+            new TransporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR), BlockSetType.IRON),
+            // TODO: after implementing cursed steel, change this material
+            ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
+    );
 
-    private static Item registerBlockItem(String name, Block block, ItemGroup group) {
-        Item item = Registry.register(Registries.ITEM, new Identifier(InfernalMod.MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
-        return item;
-    }
+    //----------------------------------------
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
-        registerBlockItem(name, block, group);
-        return Registry.register(Registries.BLOCK, new Identifier(InfernalMod.MOD_ID, name), block);
+        // register block item
+        Item item = Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
+        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
+
+        // register block
+        return Registry.register(Registries.BLOCK, new Identifier(MOD_ID, name), block);
     }
 
     public static void registerModBlocks() {
-        InfernalMod.LOGGER.info("Registering ModBlocks");
+        LOGGER.info("Registering ModBlocks");
+    }
+
+    public static void registerTransparentBlocks() {
+        BlockRenderLayerMap.INSTANCE.putBlock(TRANSPORTER, RenderLayer.getCutout());
+    }
+
+    public static class TransporterBlock
+    extends TrapdoorBlock {
+        public TransporterBlock(Settings settings, BlockSetType blockSetType) {
+            super(settings, blockSetType);
+        }
+
+        /*
+            public TransporterBlock(AbstractBlock.Settings settings, BlockSetType blockSetType) {
+                super(settings.sounds(blockSetType.soundType()), blockSetType);
+                this.setDefaultState(
+                    this.stateManager
+                        .getDefaultState()
+                        .with(FACING, Direction.NORTH)
+                        .with(OPEN,false)
+                        .with(HALF, BlockHalf.BOTTOM)
+                        .with(POWERED, false)
+                        .with(WATERLOGGED, false)
+                )
+            }
+         */
+
+        @Override
+        public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+            if (this.material == Material.METAL) {
+                return ActionResult.PASS;
+            }
+            state = (BlockState)state.cycle(OPEN);
+            world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
+            if (state.get(WATERLOGGED).booleanValue()) {
+                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            }
+            this.playToggleSound(player, world, pos, state.get(OPEN));
+            return ActionResult.success(world.isClient);
+        }
+
+        @Override
+        protected void playToggleSound(@Nullable PlayerEntity player, World world, BlockPos pos, boolean open) {
+            world.playSound(player, pos, open ? this.blockSetType.trapdoorOpen() : this.blockSetType.trapdoorClose(), SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.1f + 0.9f);
+            world.emitGameEvent((Entity)player, open ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+        }
+
+        @Override
+        public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+            if (world.isClient) {
+                return;
+            }
+            boolean bl = world.isReceivingRedstonePower(pos);
+            if (bl != state.get(POWERED)) {
+                if (state.get(OPEN) != bl) {
+                    state = (BlockState)state.with(OPEN, bl);
+                    this.playToggleSound(null, world, pos, bl);
+                }
+                world.setBlockState(pos, (BlockState)state.with(POWERED, bl), Block.NOTIFY_LISTENERS);
+                if (state.get(WATERLOGGED).booleanValue()) {
+                    world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+                }
+            }
+        }
+
     }
 }

@@ -182,7 +182,6 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
 }
 
 // TODO: add find condition for handbell
-// TODO: add item effect for handbell
-// TODO: add custom sound event for handbell
 // TODO: figure out what is the condition to get a smelting recipe in vanilla!
 // TODO: hi-res for bej stone bricks and others
+// TODO: add recipe for transporter after adding cursed metal

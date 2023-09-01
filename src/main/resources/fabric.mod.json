@@ -18,6 +18,9 @@
 		"main": [
           "infernal.mod.InfernalMod"
 		],
+		"client": [
+          "infernal.mod.InfernalModClient"
+		],
 		"fabric-datagen": [
 			"infernal.mod.InfernalModDataGenerator"
 		]

@@ -5,6 +5,7 @@ import infernal.mod.block.ModBlocks;
 import infernal.mod.item.ModItemGroup;
 import infernal.mod.item.ModItems;
 import infernal.mod.sound.ModSoundEvents;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,3 +33,4 @@ public class InfernalMod implements ModInitializer {
         LOGGER.info("Initializing Infernal Mod.");
     }
 }
+
