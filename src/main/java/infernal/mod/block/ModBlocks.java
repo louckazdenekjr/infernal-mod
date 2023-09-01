@@ -14,6 +14,8 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -153,7 +155,7 @@ public class ModBlocks {
             if (this.material == Material.METAL) {
                 return ActionResult.PASS;
             }
-            state = (BlockState)state.cycle(OPEN);
+            state = state.cycle(OPEN);
             world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
             if (state.get(WATERLOGGED).booleanValue()) {
                 world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
@@ -164,8 +166,9 @@ public class ModBlocks {
 
         @Override
         protected void playToggleSound(@Nullable PlayerEntity player, World world, BlockPos pos, boolean open) {
-            world.playSound(player, pos, open ? this.blockSetType.trapdoorOpen() : this.blockSetType.trapdoorClose(), SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.1f + 0.9f);
-            world.emitGameEvent((Entity)player, open ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
+            //world.playSound(player, pos, open ? this.blockSetType.trapdoorOpen() : this.blockSetType.trapdoorClose(), SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.1f + 0.9f);
+            world.playSound(player, pos, SoundEvent.of(SoundEvents.BLOCK_NOTE_BLOCK_BELL.value().getId()), SoundCategory.BLOCKS, 1.0f, 1.0f);
+            world.emitGameEvent(player, open ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
         }
 
         @Override
