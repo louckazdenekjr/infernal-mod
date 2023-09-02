@@ -41,7 +41,7 @@ public class HandbellItem extends Item {
                 // server side
                 ArrayList entities = (ArrayList) world.getEntitiesByType(
                         TypeFilter.instanceOf(TameableEntity.class),
-                        new Box(
+                        new Box( // radius = 32, diameter = 64
                                 user.getX() - 32,
                                 user.getY() - 32,
                                 user.getZ() - 32,
@@ -53,7 +53,7 @@ public class HandbellItem extends Item {
                 );
 
                 // this needs to be last, cuz java no likey
-                for (int i = 0; i <= entities.size(); i++) {
+                for (int i = 0; i < entities.size(); i++) {
                     if (entities.get(i) instanceof TameableEntity tEntity) {
                         if (tEntity.getOwner() == user) {
                             if (tEntity.isSitting()) {

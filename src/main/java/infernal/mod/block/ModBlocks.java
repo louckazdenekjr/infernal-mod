@@ -5,26 +5,16 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static infernal.mod.InfernalMod.*;
 
@@ -35,7 +25,7 @@ public class ModBlocks {
             "bejeweled_deepslate",
             new Block(FabricBlockSettings.copyOf(Blocks.POLISHED_DEEPSLATE)),
             ItemGroups.BUILDING_BLOCKS
-        );
+    );
 
     // register bejeweled sandstone
     public static final Block BEJEWELED_SANDSTONE = registerBlock(
@@ -129,65 +119,41 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(TRANSPORTER, RenderLayer.getCutout());
     }
 
-    public static class TransporterBlock
-    extends TrapdoorBlock {
-        public TransporterBlock(Settings settings, BlockSetType blockSetType) {
-            super(settings, blockSetType);
-        }
+    public static List<BlockPos> getBlocksInVicinity(World world, BlockPos centerPos, int radius) {
+        List<BlockPos> blocksInVicinity = new ArrayList<>();
 
-        /*
-            public TransporterBlock(AbstractBlock.Settings settings, BlockSetType blockSetType) {
-                super(settings.sounds(blockSetType.soundType()), blockSetType);
-                this.setDefaultState(
-                    this.stateManager
-                        .getDefaultState()
-                        .with(FACING, Direction.NORTH)
-                        .with(OPEN,false)
-                        .with(HALF, BlockHalf.BOTTOM)
-                        .with(POWERED, false)
-                        .with(WATERLOGGED, false)
-                )
-            }
-         */
-
-        @Override
-        public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-            if (this.material == Material.METAL) {
-                return ActionResult.PASS;
-            }
-            state = state.cycle(OPEN);
-            world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
-            if (state.get(WATERLOGGED).booleanValue()) {
-                world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-            }
-            this.playToggleSound(player, world, pos, state.get(OPEN));
-            return ActionResult.success(world.isClient);
-        }
-
-        @Override
-        protected void playToggleSound(@Nullable PlayerEntity player, World world, BlockPos pos, boolean open) {
-            //world.playSound(player, pos, open ? this.blockSetType.trapdoorOpen() : this.blockSetType.trapdoorClose(), SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.1f + 0.9f);
-            world.playSound(player, pos, SoundEvent.of(SoundEvents.BLOCK_NOTE_BLOCK_BELL.value().getId()), SoundCategory.BLOCKS, 1.0f, 1.0f);
-            world.emitGameEvent(player, open ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
-        }
-
-        @Override
-        public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-            if (world.isClient) {
-                return;
-            }
-            boolean bl = world.isReceivingRedstonePower(pos);
-            if (bl != state.get(POWERED)) {
-                if (state.get(OPEN) != bl) {
-                    state = (BlockState)state.with(OPEN, bl);
-                    this.playToggleSound(null, world, pos, bl);
-                }
-                world.setBlockState(pos, (BlockState)state.with(POWERED, bl), Block.NOTIFY_LISTENERS);
-                if (state.get(WATERLOGGED).booleanValue()) {
-                    world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        for (int x = centerPos.getX() - radius; x <= centerPos.getX() + radius; x++) {
+            for (int y = centerPos.getY() - radius; y <= centerPos.getY() + radius; y++) {
+                for (int z = centerPos.getZ() - radius; z <= centerPos.getZ() + radius; z++) {
+                    BlockPos currentPos = new BlockPos(x, y, z);
+                    //BlockState blockState = world.getBlockState(currentPos);
+                    blocksInVicinity.add(currentPos);
                 }
             }
         }
 
+        return blocksInVicinity;
+    }
+
+    public static List<BlockPos> getBlocksInVicinityByType(World world, BlockPos centerPos, int radius, BlockState targetType) {
+        List<BlockPos> blocksInVicinity = new ArrayList<>();
+
+        for (int x = centerPos.getX() - radius; x <= centerPos.getX() + radius; x++) {
+            for (int y = centerPos.getY() - radius; y <= centerPos.getY() + radius; y++) {
+                for (int z = centerPos.getZ() - radius; z <= centerPos.getZ() + radius; z++) {
+                    BlockPos currentPos = new BlockPos(x, y, z);
+                    BlockState blockState = world.getBlockState(currentPos);
+
+                    // Apply the filter to check if the block matches the desired type
+                    if (targetType.getBlock() == blockState.getBlock()) {
+                        blocksInVicinity.add(currentPos);
+                    }
+                }
+            }
+        }
+
+        return blocksInVicinity;
     }
 }
+
+

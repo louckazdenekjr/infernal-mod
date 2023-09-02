@@ -1,6 +1,6 @@
-// 1.19.4	2023-09-01T21:31:00.62296	Infernal Mod/Model Definitions
-510b9c1602dd0312cc2475a21a1db595414f000c assets\infernal-mod\blockstates\polished_calcite.json
+// 1.19.4	2023-09-02T12:15:17.1337268	Infernal Mod/Model Definitions
 4a3ea32ddca452b88869288068325c6b4d3340be assets\infernal-mod\blockstates\bejeweled_terracotta.json
+510b9c1602dd0312cc2475a21a1db595414f000c assets\infernal-mod\blockstates\polished_calcite.json
 250319a0341e4b65c190af3694c22ec624b83c2b assets\infernal-mod\models\block\transporter_top.json
 3bb756a1d6d283b527bd7cdc261bd40170d54655 assets\infernal-mod\blockstates\bejeweled_sandstone.json
 7a7dce59df1c10b14029a0e565a45aa7763aff1e assets\infernal-mod\models\item\calcite_bricks.json
@@ -30,5 +30,5 @@ f5566ec985b35172250ad5fa6b8b7f8a0e10baae assets\infernal-mod\models\block\cracke
 493d86bd06f58e75e8080c71ddd042fa2c091f1b assets\infernal-mod\models\block\calcite_bricks.json
 a39711526fc1368917e838aec4ac5b11dc5fc93f assets\infernal-mod\models\block\bejeweled_sandstone.json
 52fcb6e2835e15e2ff78abb6eedb9fe15cd9d3fa assets\infernal-mod\models\block\bejeweled_stone_bricks.json
-13423e25e750c08bde824429e834a4a47cdf9d16 assets\infernal-mod\models\block\bejeweled_terracotta.json
 ac8aacf3178e14c12a9d372c6e432078cfb675a7 assets\infernal-mod\models\block\bejeweled_calcite_bricks.json
+13423e25e750c08bde824429e834a4a47cdf9d16 assets\infernal-mod\models\block\bejeweled_terracotta.json
