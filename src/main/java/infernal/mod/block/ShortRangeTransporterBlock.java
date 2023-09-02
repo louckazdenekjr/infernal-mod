@@ -18,32 +18,83 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TransporterBlock
+public class ShortRangeTransporterBlock
         extends TrapdoorBlock {
-    public TransporterBlock(Settings settings, BlockSetType blockSetType) {
+    public ShortRangeTransporterBlock(Settings settings, BlockSetType blockSetType) {
 
         super(settings, blockSetType);
     }
 
+    /*
+        public TransporterBlock(AbstractBlock.Settings settings, BlockSetType blockSetType) {
+            super(settings.sounds(blockSetType.soundType()), blockSetType);
+            this.setDefaultState(
+                this.stateManager
+                    .getDefaultState()
+                    .with(FACING, Direction.NORTH)
+                    .with(OPEN,false)
+                    .with(HALF, BlockHalf.BOTTOM)
+                    .with(POWERED, false)
+                    .with(WATERLOGGED, false)
+            )
+        }
+     */
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        /*
+        if (this.material == Material.METAL) {
+            return ActionResult.PASS;
+        }
+        state = state.cycle(OPEN);
+        world.setBlockState(pos, state, Block.NOTIFY_LISTENERS);
+
+        // update fluids after changing shape
+        if (state.get(WATERLOGGED).booleanValue()) {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        */
+
         if (world.isClient) {
             // client side
             // play activation sound
             this.playToggleSound(player, world, pos, state.get(OPEN));
         } else {
             // server side
-            //boolean foundTransporter;
 
             /*
-            player.teleport(
-                    (double) transporters.get(i).getX() + 0.5,
-                    (double) transporters.get(i).getY() + 0.5,
-                    (double) transporters.get(i).getZ() + 0.5
-            );
-            */
+            Item mainHand = player.getMainHandStack().getItem();
+            Item offHand = player.getOffHandStack().getItem();
+            Item TransporterInstance = state.getBlock().asItem();
+            if (mainHand == TransporterInstance || offHand == TransporterInstance) {
+                //(TransporterBlock) hand;
+                //player.swingHand(hand);
+                return ActionResult.SUCCESS;
+            }
 
-            player.sendMessage(Text.of("Not implemented!"), false);
+             */
+
+            // if no transporter in hand
+            //boolean foundTransporter;
+            List<BlockPos> transporters = ModBlocks.getBlocksInVicinityByType(world, pos, 64, state);
+
+            // exclude current block from list
+            for (int i = 0; i < transporters.size(); i++) {
+                if (transporters.get(i).asLong() == pos.asLong()) {
+                    transporters.remove(i);
+                }
+            }
+            // TODO: go to closest!
+            // teleport to the nearest transporter
+            for (int i = 0; i < transporters.size(); i++) {
+                //player.sendMessage(Text.of("Found a transporter in vicinity!"), false);
+                player.teleport(
+                        (double) transporters.get(i).getX() + 0.5,
+                        (double) transporters.get(i).getY() + 0.5,
+                        (double) transporters.get(i).getZ() + 0.5
+                );
+            }
+            player.sendMessage(Text.of("Found (" + transporters.size() + ") transporters in vicinity!"), false);
         }
 
         // return success
@@ -65,7 +116,7 @@ public class TransporterBlock
         } else {
             boolean bl = world.isReceivingRedstonePower(pos);
             if (bl != state.get(POWERED)) {
-                // TODO: implement this! redstone
+                // TODO: implement this? redstone
                 this.playToggleSound(null, world, pos, bl);
             }
         }
@@ -87,4 +138,3 @@ public class TransporterBlock
 }
 
 // FIXME: when placing a transporter on activated block it becomes tilted
-// TODO:

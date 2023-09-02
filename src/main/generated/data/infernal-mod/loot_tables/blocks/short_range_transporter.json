@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "infernal-mod:transporter"
+          "name": "infernal-mod:short_range_transporter"
         }
       ],
       "rolls": 1.0

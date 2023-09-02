@@ -83,15 +83,12 @@ public class ModBlocks {
             ItemGroups.BUILDING_BLOCKS
     );
 
-    /*
-    // register transporter
-    public static final SlabBlock TRANSPORTER = (SlabBlock) registerBlock(
-            "transporter",
-            new SlabBlock(FabricBlockSettings.of(Material.METAL)),
+    public static final ShortRangeTransporterBlock SHORT_RANGE_TRANSPORTER = (ShortRangeTransporterBlock) registerBlock(
+            "short_range_transporter",
+            new ShortRangeTransporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR), BlockSetType.IRON),
             // TODO: after implementing cursed steel, change this material
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
-    */
 
     public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlock(
             "transporter",
@@ -99,6 +96,7 @@ public class ModBlocks {
             // TODO: after implementing cursed steel, change this material
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
+
 
     //----------------------------------------
 
@@ -116,7 +114,7 @@ public class ModBlocks {
     }
 
     public static void registerTransparentBlocks() {
-        BlockRenderLayerMap.INSTANCE.putBlock(TRANSPORTER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SHORT_RANGE_TRANSPORTER, RenderLayer.getCutout());
     }
 
     public static List<BlockPos> getBlocksInVicinity(World world, BlockPos centerPos, int radius) {

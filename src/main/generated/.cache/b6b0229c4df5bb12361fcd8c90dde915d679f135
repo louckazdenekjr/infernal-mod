@@ -1,4 +1,4 @@
-// 1.19.4	2023-09-02T13:34:46.7016961	Infernal Mod/Tags for minecraft:block
-bfeccb174af8582057097d85e295ab467f682202 data\minecraft\tags\blocks\needs_stone_tool.json
-0d294eda5aebdebb210917302295fa7632635c88 data\minecraft\tags\blocks\mineable\pickaxe.json
+// 1.19.4	2023-09-02T17:19:10.3442841	Infernal Mod/Tags for minecraft:block
+d42074a61a18e5a846a3a14469eb1f7991860124 data\minecraft\tags\blocks\needs_stone_tool.json
+100bfcefeac14c657d5455d797dd4858ca24774e data\minecraft\tags\blocks\mineable\pickaxe.json
 58e776f0dbd6f8adbd13ca5c36daa5d21a8df4fb data\minecraft\tags\blocks\needs_iron_tool.json

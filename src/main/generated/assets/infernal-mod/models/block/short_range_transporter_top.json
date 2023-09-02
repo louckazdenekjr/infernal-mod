@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_trapdoor_top",
   "textures": {
-    "texture": "infernal-mod:block/transporter"
+    "texture": "infernal-mod:block/short_range_transporter"
   }
 }

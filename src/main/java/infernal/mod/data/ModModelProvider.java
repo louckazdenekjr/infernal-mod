@@ -1,7 +1,6 @@
 package infernal.mod.data;
 
 
-import infernal.mod.InfernalMod;
 import infernal.mod.block.ModBlocks;
 import infernal.mod.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -10,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
-import net.minecraft.util.Identifier;
 
 
 public class ModModelProvider extends FabricModelProvider {
@@ -29,7 +27,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_STONE_BRICKS);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_TERRACOTTA);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_TERRACOTTA);
-        blockStateModelGenerator.registerTrapdoor((Block) ModBlocks.TRANSPORTER);
+        blockStateModelGenerator.registerTrapdoor((Block) ModBlocks.SHORT_RANGE_TRANSPORTER);
         /*
         blockStateModelGenerator.registerDoubleBlock(
                 ModBlocks.TRANSPORTER,
