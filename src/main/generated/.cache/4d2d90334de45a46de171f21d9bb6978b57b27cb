@@ -1,7 +1,7 @@
-// 1.19.4	2023-09-02T17:19:10.3442841	Infernal Mod/Model Definitions
+// 1.19.4	2023-09-03T00:36:34.3952081	Infernal Mod/Model Definitions
 46edc8c0f9d7e3419a48a1c1da2dc32348e9a7c5 assets\infernal-mod\models\block\short_range_transporter_top.json
-4a3ea32ddca452b88869288068325c6b4d3340be assets\infernal-mod\blockstates\bejeweled_terracotta.json
 510b9c1602dd0312cc2475a21a1db595414f000c assets\infernal-mod\blockstates\polished_calcite.json
+4a3ea32ddca452b88869288068325c6b4d3340be assets\infernal-mod\blockstates\bejeweled_terracotta.json
 4e08dc42277ec90ee29ca9c2fcc2c0c754ec69a7 assets\infernal-mod\models\block\short_range_transporter_bottom.json
 3bb756a1d6d283b527bd7cdc261bd40170d54655 assets\infernal-mod\blockstates\bejeweled_sandstone.json
 7a7dce59df1c10b14029a0e565a45aa7763aff1e assets\infernal-mod\models\item\calcite_bricks.json

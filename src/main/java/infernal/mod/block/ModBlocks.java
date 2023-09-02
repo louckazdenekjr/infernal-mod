@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static infernal.mod.InfernalMod.*;
+import static net.minecraft.registry.Registries.*;
 
 
 public class ModBlocks {
@@ -97,16 +98,15 @@ public class ModBlocks {
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
 
-
     //----------------------------------------
 
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         // register block item
-        Item item = Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
+        Item item = Registry.register(ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
 
         // register block
-        return Registry.register(Registries.BLOCK, new Identifier(MOD_ID, name), block);
+        return Registry.register(BLOCK, new Identifier(MOD_ID, name), block);
     }
 
     public static void registerModBlocks() {

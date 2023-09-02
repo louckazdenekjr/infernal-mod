@@ -5,6 +5,7 @@ import net.minecraft.block.BlockSetType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -13,6 +14,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,6 +22,8 @@ import java.util.List;
 
 public class ShortRangeTransporterBlock
         extends TrapdoorBlock {
+    private PlayerEntity user;
+
     public ShortRangeTransporterBlock(Settings settings, BlockSetType blockSetType) {
 
         super(settings, blockSetType);
@@ -60,6 +64,19 @@ public class ShortRangeTransporterBlock
             // play activation sound
             this.playToggleSound(player, world, pos, state.get(OPEN));
         } else {
+            this.user = player;
+            world.scheduleBlockTick(new BlockPos(pos), this, 20);
+        }
+
+        // return success
+        return ActionResult.success(world.isClient);
+    }
+
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random){
+        if (world.isClient) {
+            // client side
+        } else {
+            //
             // server side
 
             /*
@@ -86,19 +103,17 @@ public class ShortRangeTransporterBlock
             }
             // TODO: go to closest!
             // teleport to the nearest transporter
+            //player.sendMessage(Text.of("Found (" + transporters.size() + ") transporters in vicinity!"), false);
+
             for (int i = 0; i < transporters.size(); i++) {
                 //player.sendMessage(Text.of("Found a transporter in vicinity!"), false);
-                player.teleport(
+                this.user.teleport(
                         (double) transporters.get(i).getX() + 0.5,
                         (double) transporters.get(i).getY() + 0.5,
                         (double) transporters.get(i).getZ() + 0.5
                 );
             }
-            player.sendMessage(Text.of("Found (" + transporters.size() + ") transporters in vicinity!"), false);
         }
-
-        // return success
-        return ActionResult.success(world.isClient);
     }
 
     @Override
