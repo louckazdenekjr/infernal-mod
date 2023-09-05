@@ -1,4 +1,4 @@
-package infernal.mod.data;
+package infernal.mod.datagen;
 
 
 import com.google.common.collect.Lists;

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "infernal-mod:block/transporter",
+    "side": "infernal-mod:block/transporter_side",
+    "top": "infernal-mod:block/transporter"
+  }
+}

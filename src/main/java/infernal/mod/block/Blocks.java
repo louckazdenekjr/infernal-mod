@@ -4,10 +4,15 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSetType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.item.*;
-import net.minecraft.registry.Registries;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -16,8 +21,10 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-import static infernal.mod.InfernalMod.*;
-import static net.minecraft.registry.Registries.*;
+import static infernal.mod.InfernalMod.LOGGER;
+import static infernal.mod.InfernalMod.MOD_ID;
+import static net.minecraft.registry.Registries.BLOCK;
+import static net.minecraft.registry.Registries.ITEM;
 
 
 public class ModBlocks {
@@ -93,7 +100,7 @@ public class ModBlocks {
 
     public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlock(
             "transporter",
-            new TransporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR), BlockSetType.IRON),
+            new TransporterBlock(FabricBlockSettings.copyOf(Blocks.BLACKSTONE_SLAB)),
             // TODO: after implementing cursed steel, change this material
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );

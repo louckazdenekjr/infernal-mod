@@ -1,4 +1,4 @@
-package infernal.mod.data;
+package infernal.mod.datagen;
 
 
 import infernal.mod.block.ModBlocks;

@@ -9,7 +9,7 @@ public class ModSoundEvents {
     public static final SoundEvent HANDBELL_RINGING = registerSoundEvent("infernal-mod:handbell_ringing");
 
     private static SoundEvent registerSoundEvent(String identifier) {
-        return SoundEvent.of(new Identifier("infernal-mod:handbell_ringing") );
+        return SoundEvent.of(new Identifier("infernal-mod:handbell_ringing"));
     }
 
     public static void registerModSoundEvents() {
