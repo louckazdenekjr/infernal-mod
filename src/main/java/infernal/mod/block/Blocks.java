@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -27,39 +26,39 @@ import static net.minecraft.registry.Registries.BLOCK;
 import static net.minecraft.registry.Registries.ITEM;
 
 
-public class ModBlocks {
+public class Blocks {
     // register bejeweled deepslate
     public static final Block BEJEWELED_DEEPSLATE = registerBlock(
             "bejeweled_deepslate",
-            new Block(FabricBlockSettings.copyOf(Blocks.POLISHED_DEEPSLATE)),
+            new Block(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.POLISHED_DEEPSLATE)),
             ItemGroups.BUILDING_BLOCKS
     );
 
     // register bejeweled sandstone
     public static final Block BEJEWELED_SANDSTONE = registerBlock(
             "bejeweled_sandstone",
-            new Block(FabricBlockSettings.copyOf(Blocks.CUT_SANDSTONE)),
+            new Block(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.CUT_SANDSTONE)),
             ItemGroups.BUILDING_BLOCKS
     );
 
     // register polished calcite
     public static final Block POLISHED_CALCITE = registerBlock(
             "polished_calcite",
-            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE)),
+            new Block(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.CALCITE)),
             ItemGroups.BUILDING_BLOCKS
     );
 
     // register calcite bricks
     public static final Block CALCITE_BRICKS = registerBlock(
             "calcite_bricks",
-            new Block(FabricBlockSettings.copyOf(ModBlocks.POLISHED_CALCITE)),
+            new Block(FabricBlockSettings.copyOf(Blocks.POLISHED_CALCITE)),
             ItemGroups.BUILDING_BLOCKS
     );
 
     // register cracked calcite bricks
     public static final Block CRACKED_CALCITE_BRICKS = registerBlock(
             "cracked_calcite_bricks",
-            new Block(FabricBlockSettings.copyOf(ModBlocks.CALCITE_BRICKS)),
+            new Block(FabricBlockSettings.copyOf(Blocks.CALCITE_BRICKS)),
             ItemGroups.BUILDING_BLOCKS
     );
 
@@ -73,14 +72,14 @@ public class ModBlocks {
     // register bejeweled stone bricks
     public static final Block BEJEWELED_STONE_BRICKS = registerBlock(
             "bejeweled_stone_bricks",
-            new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)),
+            new Block(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.CHISELED_STONE_BRICKS)),
             ItemGroups.BUILDING_BLOCKS
     );
 
     // register bejeweled bejeweled terracota
     public static final Block POLISHED_TERRACOTTA = registerBlock(
             "polished_terracotta",
-            new Block(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)),
+            new Block(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.TERRACOTTA)),
             ItemGroups.BUILDING_BLOCKS
     );
 
@@ -93,14 +92,14 @@ public class ModBlocks {
 
     public static final ShortRangeTransporterBlock SHORT_RANGE_TRANSPORTER = (ShortRangeTransporterBlock) registerBlock(
             "short_range_transporter",
-            new ShortRangeTransporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_TRAPDOOR), BlockSetType.IRON),
+            new ShortRangeTransporterBlock(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.IRON_TRAPDOOR), BlockSetType.IRON),
             // TODO: after implementing cursed steel, change this material
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
 
     public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlock(
             "transporter",
-            new TransporterBlock(FabricBlockSettings.copyOf(Blocks.BLACKSTONE_SLAB)),
+            new TransporterBlock(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.BLACKSTONE_SLAB).nonOpaque()),
             // TODO: after implementing cursed steel, change this material
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
@@ -122,6 +121,7 @@ public class ModBlocks {
 
     public static void registerTransparentBlocks() {
         BlockRenderLayerMap.INSTANCE.putBlock(SHORT_RANGE_TRANSPORTER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(TRANSPORTER, RenderLayer.getCutout());
     }
 
     public static List<BlockPos> getBlocksInVicinity(World world, BlockPos centerPos, int radius) {

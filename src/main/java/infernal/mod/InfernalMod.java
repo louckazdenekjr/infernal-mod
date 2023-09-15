@@ -1,11 +1,10 @@
 package infernal.mod;
 
 
-import infernal.mod.block.ModBlocks;
-import infernal.mod.item.ModItemGroup;
-import infernal.mod.item.ModItems;
-import infernal.mod.sound.ModSoundEvents;
-import net.fabricmc.api.ClientModInitializer;
+import infernal.mod.block.Blocks;
+import infernal.mod.item.ItemGroups;
+import infernal.mod.item.Items;
+import infernal.mod.sound.SoundEvents;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +24,10 @@ public class InfernalMod implements ModInitializer {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
-        ModItemGroup.registerItemGroups();
-        ModItems.registerModItems();
-        ModBlocks.registerModBlocks();
-        ModSoundEvents.registerModSoundEvents();
+        ItemGroups.registerItemGroups();
+        Items.registerModItems();
+        Blocks.registerModBlocks();
+        SoundEvents.registerModSoundEvents();
 
         LOGGER.info("Initializing Infernal Mod.");
     }

@@ -3,7 +3,7 @@ package infernal.mod.item;
 import net.minecraft.item.ItemGroup;
 
 
-public class ModItemGroup {
+public class ItemGroups {
     public static ItemGroup VARIOUS;
 
     public static void registerItemGroups() {

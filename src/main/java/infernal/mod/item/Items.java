@@ -1,7 +1,6 @@
 package infernal.mod.item;
 
 import infernal.mod.InfernalMod;
-import infernal.mod.item.custom.HandbellItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -12,7 +11,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 
-public class ModItems {
+public class Items {
     public static final Item HANDBELL = registerItem(
             "handbell",
             new HandbellItem(new FabricItemSettings())

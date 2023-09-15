@@ -4,7 +4,7 @@ import infernal.mod.InfernalMod;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
-public class ModSoundEvents {
+public class SoundEvents {
     // register handbell sound
     public static final SoundEvent HANDBELL_RINGING = registerSoundEvent("infernal-mod:handbell_ringing");
 

@@ -1,6 +1,6 @@
-package infernal.mod.item.custom;
+package infernal.mod.item;
 
-import infernal.mod.sound.ModSoundEvents;
+import infernal.mod.sound.SoundEvents;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,7 +36,7 @@ public class HandbellItem extends Item {
                 // client side
                 // play sound effect
                 //user.playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
-                user.playSound(ModSoundEvents.HANDBELL_RINGING, 1.0f, 1.0f);
+                user.playSound(SoundEvents.HANDBELL_RINGING, 1.0f, 1.0f);
             } else {
                 // server side
                 ArrayList entities = (ArrayList) world.getEntitiesByType(

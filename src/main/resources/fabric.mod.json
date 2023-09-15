@@ -22,7 +22,7 @@
           "infernal.mod.InfernalModClient"
 		],
 		"fabric-datagen": [
-			"infernal.mod.InfernalModDataGenerator"
+			"infernal.mod.InfernalModDataGen"
 		]
 	},
 	"mixins": [

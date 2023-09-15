@@ -1,29 +1,29 @@
 package infernal.mod.datagen;
 
 
-import infernal.mod.block.ModBlocks;
+import infernal.mod.block.Blocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 
 
-public class ModLootTableGenerator extends FabricBlockLootTableProvider {
-    public ModLootTableGenerator(FabricDataOutput dataOutput) {
+public class LootTableGenerator extends FabricBlockLootTableProvider {
+    public LootTableGenerator(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 
     @Override
     public void generate() {
         // drops itself
-        addDrop(ModBlocks.BEJEWELED_DEEPSLATE);
-        addDrop(ModBlocks.BEJEWELED_SANDSTONE);
-        addDrop(ModBlocks.POLISHED_CALCITE);
-        addDrop(ModBlocks.CALCITE_BRICKS);
-        addDrop(ModBlocks.CRACKED_CALCITE_BRICKS);
-        addDrop(ModBlocks.BEJEWELED_CALCITE_BRICKS);
-        addDrop(ModBlocks.BEJEWELED_STONE_BRICKS);
-        addDrop(ModBlocks.POLISHED_TERRACOTTA);
-        addDrop(ModBlocks.BEJEWELED_TERRACOTTA);
-        addDrop(ModBlocks.SHORT_RANGE_TRANSPORTER);
+        addDrop(Blocks.BEJEWELED_DEEPSLATE);
+        addDrop(Blocks.BEJEWELED_SANDSTONE);
+        addDrop(Blocks.POLISHED_CALCITE);
+        addDrop(Blocks.CALCITE_BRICKS);
+        addDrop(Blocks.CRACKED_CALCITE_BRICKS);
+        addDrop(Blocks.BEJEWELED_CALCITE_BRICKS);
+        addDrop(Blocks.BEJEWELED_STONE_BRICKS);
+        addDrop(Blocks.POLISHED_TERRACOTTA);
+        addDrop(Blocks.BEJEWELED_TERRACOTTA);
+        addDrop(Blocks.SHORT_RANGE_TRANSPORTER);
 
         // with and without silk touch
         //addDrop(ModBlocks.CITRINE_ORE, oreDrops(ModBlocks.CITRINE_ORE, ModItems.RAW_CITRINE));

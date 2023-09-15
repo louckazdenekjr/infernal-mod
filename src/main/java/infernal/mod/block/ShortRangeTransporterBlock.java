@@ -9,7 +9,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -66,13 +65,14 @@ public class ShortRangeTransporterBlock
         } else {
             this.user = player;
             world.scheduleBlockTick(new BlockPos(pos), this, 20);
+            // FIXME: add ticking variable and check it to avoid scheduling multiple ticks
         }
 
         // return success
         return ActionResult.success(world.isClient);
     }
 
-    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random){
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (world.isClient) {
             // client side
         } else {
@@ -93,7 +93,7 @@ public class ShortRangeTransporterBlock
 
             // if no transporter in hand
             //boolean foundTransporter;
-            List<BlockPos> transporters = ModBlocks.getBlocksInVicinityByType(world, pos, 64, state);
+            List<BlockPos> transporters = Blocks.getBlocksInVicinityByType(world, pos, 64, state);
 
             // exclude current block from list
             for (int i = 0; i < transporters.size(); i++) {

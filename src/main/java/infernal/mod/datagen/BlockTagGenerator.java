@@ -1,7 +1,7 @@
 package infernal.mod.datagen;
 
 
-import infernal.mod.block.ModBlocks;
+import infernal.mod.block.Blocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
@@ -10,32 +10,32 @@ import net.minecraft.registry.tag.BlockTags;
 import java.util.concurrent.CompletableFuture;
 
 
-public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
+    public BlockTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.BEJEWELED_DEEPSLATE)
-                .add(ModBlocks.BEJEWELED_SANDSTONE)
-                .add(ModBlocks.POLISHED_CALCITE)
-                .add(ModBlocks.CALCITE_BRICKS)
-                .add(ModBlocks.CRACKED_CALCITE_BRICKS)
-                .add(ModBlocks.BEJEWELED_CALCITE_BRICKS)
-                .add(ModBlocks.BEJEWELED_STONE_BRICKS)
-                .add(ModBlocks.POLISHED_TERRACOTTA)
-                .add(ModBlocks.BEJEWELED_TERRACOTTA)
-                .add(ModBlocks.SHORT_RANGE_TRANSPORTER);
+                .add(Blocks.BEJEWELED_DEEPSLATE)
+                .add(Blocks.BEJEWELED_SANDSTONE)
+                .add(Blocks.POLISHED_CALCITE)
+                .add(Blocks.CALCITE_BRICKS)
+                .add(Blocks.CRACKED_CALCITE_BRICKS)
+                .add(Blocks.BEJEWELED_CALCITE_BRICKS)
+                .add(Blocks.BEJEWELED_STONE_BRICKS)
+                .add(Blocks.POLISHED_TERRACOTTA)
+                .add(Blocks.BEJEWELED_TERRACOTTA)
+                .add(Blocks.SHORT_RANGE_TRANSPORTER);
         // TODO: remove explicit tags from blocks that inherit properties
 
         // wooden tool level is implied
         // other tool levels assigned here
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBlocks.SHORT_RANGE_TRANSPORTER);
+                .add(Blocks.SHORT_RANGE_TRANSPORTER);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.BEJEWELED_DEEPSLATE);
+                .add(Blocks.BEJEWELED_DEEPSLATE);
     }
 }

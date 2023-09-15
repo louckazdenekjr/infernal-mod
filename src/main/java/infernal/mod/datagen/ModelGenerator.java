@@ -1,33 +1,49 @@
 package infernal.mod.datagen;
 
 
-import infernal.mod.block.ModBlocks;
-import infernal.mod.item.ModItems;
+import infernal.mod.block.Blocks;
+import infernal.mod.item.Items;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
+import net.minecraft.util.Identifier;
 
 
-public class ModModelProvider extends FabricModelProvider {
-    public ModModelProvider(FabricDataOutput output) {
+public class ModelGenerator extends FabricModelProvider {
+    public ModelGenerator(FabricDataOutput output) {
         super(output);
     }
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_DEEPSLATE);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_SANDSTONE);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_CALCITE);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.CALCITE_BRICKS);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.CRACKED_CALCITE_BRICKS);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_CALCITE_BRICKS);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_STONE_BRICKS);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.POLISHED_TERRACOTTA);
-        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.BEJEWELED_TERRACOTTA);
-        blockStateModelGenerator.registerTrapdoor(ModBlocks.SHORT_RANGE_TRANSPORTER);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.BEJEWELED_DEEPSLATE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.BEJEWELED_SANDSTONE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.POLISHED_CALCITE);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.CALCITE_BRICKS);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.CRACKED_CALCITE_BRICKS);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.BEJEWELED_CALCITE_BRICKS);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.BEJEWELED_STONE_BRICKS);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.POLISHED_TERRACOTTA);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.BEJEWELED_TERRACOTTA);
+        blockStateModelGenerator.registerTrapdoor(Blocks.SHORT_RANGE_TRANSPORTER);
+
+        //blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.TRANSPORTER);
+        //
+        //TexturedModel transporterModel = blockStateModelGenerator.texturedModels.getOrDefault(
+                //        Blocks.TRANSPORTER,
+        //        TexturedModel.CUBE_ALL.get(Blocks.TRANSPORTER)
+                //);
+        //
+        //new BlockStateModelGenerator.BlockTexturePool(transporterModel.getTextures())).base(Blocks.TRANSPORTER, transporterModel.getModel();
+
+        //Block block = net.minecraft.block.Blocks.OAK_PLANKS;
+        //Identifier identifier = ModelIds.getBlockModelId(block);
+        //TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(block);
+        //Block block2 = net.minecraft.block.Blocks.PETRIFIED_OAK_SLAB;
+        //Identifier identifier2 = Models.SLAB.upload(block2, texturedModel.getTextures(), this.modelCollector);
+        //Identifier identifier3 = Models.SLAB_TOP.upload(block2, texturedModel.getTextures(), this.modelCollector);
+        //this.blockStateCollector.accept(createSlabBlockState(block2, identifier2, identifier3, identifier));
 
         /*
         TextureMap textureMap = TextureMap.all(ModBlocks.TRANSPORTER);
@@ -42,7 +58,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(ModItems.HANDBELL, Models.GENERATED);
+        itemModelGenerator.register(Items.HANDBELL, Models.GENERATED);
         //itemModelGenerator.register(ModItems.RAW_CITRINE, Models.GENERATED);
     }
 
