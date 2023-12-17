@@ -97,13 +97,14 @@ public class Blocks {
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
 
-    static Block transporterBlockBlock = new TransporterBlock(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.BLACKSTONE_SLAB).nonOpaque());
+    public static final Block transporterBlockBlock = new TransporterBlock(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.BLACKSTONE_SLAB).nonOpaque());
+    public static final BlockItem transporterBlockItem = (BlockItem) new TransporterBlockItem(transporterBlockBlock, new FabricItemSettings());
     public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlockWithCustomItem(
             "transporter",
             transporterBlockBlock,
             // TODO: after implementing cursed steel, change this material
             ItemGroups.REDSTONE, // TODO: implement redstone trigger as condition
-            (BlockItem) new TransporterBlockItem(transporterBlockBlock, new FabricItemSettings())
+            transporterBlockItem
     );
 
     //----------------------------------------

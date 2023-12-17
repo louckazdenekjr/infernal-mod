@@ -59,7 +59,7 @@ public class ModelGenerator extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(Items.HANDBELL, Models.GENERATED);
-        //itemModelGenerator.register(ModItems.RAW_CITRINE, Models.GENERATED);
+        //itemModelGenerator.register(Blocks.transporterBlockItem, Models.GENERATED);
     }
 
     /*
