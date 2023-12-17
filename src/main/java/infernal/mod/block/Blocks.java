@@ -97,11 +97,13 @@ public class Blocks {
             ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
     );
 
-    public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlock(
+    static Block transporterBlockBlock = new TransporterBlock(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.BLACKSTONE_SLAB).nonOpaque());
+    public static final TransporterBlock TRANSPORTER = (TransporterBlock) registerBlockWithCustomItem(
             "transporter",
-            new TransporterBlock(FabricBlockSettings.copyOf(net.minecraft.block.Blocks.BLACKSTONE_SLAB).nonOpaque()),
+            transporterBlockBlock,
             // TODO: after implementing cursed steel, change this material
-            ItemGroups.REDSTONE // TODO: implement redstone trigger as condition
+            ItemGroups.REDSTONE, // TODO: implement redstone trigger as condition
+            (BlockItem) new TransporterBlockItem(transporterBlockBlock, new FabricItemSettings())
     );
 
     //----------------------------------------
@@ -109,6 +111,15 @@ public class Blocks {
     private static Block registerBlock(String name, Block block, ItemGroup group) {
         // register block item
         Item item = Registry.register(ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
+        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
+
+        // register block
+        return Registry.register(BLOCK, new Identifier(MOD_ID, name), block);
+    }
+
+    private static Block registerBlockWithCustomItem(String name, Block block, ItemGroup group, BlockItem blockItem) {
+        // register block with a custom block item
+        Item item = Registry.register(ITEM, new Identifier(MOD_ID, name), blockItem);
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
 
         // register block
