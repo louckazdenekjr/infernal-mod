@@ -18,7 +18,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static infernal.mod.InfernalMod.LOGGER;
 import static infernal.mod.InfernalMod.MOD_ID;
@@ -138,7 +140,6 @@ public class Blocks {
 
     public static List<BlockPos> getBlocksInVicinity(World world, BlockPos centerPos, int radius) {
         List<BlockPos> blocksInVicinity = new ArrayList<>();
-
         for (int x = centerPos.getX() - radius; x <= centerPos.getX() + radius; x++) {
             for (int y = centerPos.getY() - radius; y <= centerPos.getY() + radius; y++) {
                 for (int z = centerPos.getZ() - radius; z <= centerPos.getZ() + radius; z++) {
@@ -148,13 +149,11 @@ public class Blocks {
                 }
             }
         }
-
         return blocksInVicinity;
     }
 
     public static List<BlockPos> getBlocksInVicinityByType(World world, BlockPos centerPos, int radius, BlockState targetType) {
         List<BlockPos> blocksInVicinity = new ArrayList<>();
-
         for (int x = centerPos.getX() - radius; x <= centerPos.getX() + radius; x++) {
             for (int y = centerPos.getY() - radius; y <= centerPos.getY() + radius; y++) {
                 for (int z = centerPos.getZ() - radius; z <= centerPos.getZ() + radius; z++) {
@@ -168,8 +167,34 @@ public class Blocks {
                 }
             }
         }
-
         return blocksInVicinity;
+    }
+
+    public static BlockPos getClosestBlockInVicinityByType(World world, BlockPos centerPos, int radius, BlockState targetType) {
+        Set<BlockPos> scannedPositions = new HashSet<>();
+        for (int currentRadius = 0; currentRadius <= radius; currentRadius++) {
+            for (int x = centerPos.getX() - currentRadius; x <= centerPos.getX() + currentRadius; x++) {
+                for (int y = centerPos.getY() - currentRadius; y <= centerPos.getY() + currentRadius; y++) {
+                    for (int z = centerPos.getZ() - currentRadius; z <= centerPos.getZ() + currentRadius; z++) {
+                        BlockPos currentPos = new BlockPos(x, y, z);
+                        if (scannedPositions.contains(currentPos)) {
+                            continue;
+                        }
+
+                        BlockState blockState = world.getBlockState(currentPos);
+                        // Apply the filter to check if the block matches the desired type
+                        if (targetType.getBlock() == blockState.getBlock()) {
+                            if (centerPos.asLong() != currentPos.asLong()) {
+                                return currentPos;
+                            }
+                        } else {
+                            scannedPositions.add(currentPos);
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 }
 

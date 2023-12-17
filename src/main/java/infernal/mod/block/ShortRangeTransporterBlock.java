@@ -93,18 +93,37 @@ public class ShortRangeTransporterBlock
 
             // if no transporter in hand
             //boolean foundTransporter;
+            //BlockPos closestTransporter = Blocks.getClosestBlockInVicinityByType(world, pos, 64, state);
             List<BlockPos> transporters = Blocks.getBlocksInVicinityByType(world, pos, 64, state);
 
+            // teleport to first teleporter in the array
+            //player.sendMessage(Text.of("Found (" + transporters.size() + ") transporters in vicinity!"), false);
+
+            /*
+            if (closestTransporter != null) {
+                this.user.teleport(
+                        (double) closestTransporter.getX() + 0.5,
+                        (double) closestTransporter.getY() + 0.5,
+                        (double) closestTransporter.getZ() + 0.5
+                );
+            }
+            */
             // exclude current block from list
             for (int i = 0; i < transporters.size(); i++) {
                 if (transporters.get(i).asLong() == pos.asLong()) {
                     transporters.remove(i);
                 }
             }
-            // TODO: go to closest!
-            // teleport to the nearest transporter
-            //player.sendMessage(Text.of("Found (" + transporters.size() + ") transporters in vicinity!"), false);
 
+            if (transporters.size() > 0) {
+                this.user.teleport(
+                        (double) transporters.get(0).getX() + 0.5,
+                        (double) transporters.get(0).getY() + 0.5,
+                        (double) transporters.get(0).getZ() + 0.5
+                );
+            }
+
+            /*
             for (int i = 0; i < transporters.size(); i++) {
                 //player.sendMessage(Text.of("Found a transporter in vicinity!"), false);
                 this.user.teleport(
@@ -113,6 +132,8 @@ public class ShortRangeTransporterBlock
                         (double) transporters.get(i).getZ() + 0.5
                 );
             }
+             */
+
         }
     }
 
@@ -147,6 +168,15 @@ public class ShortRangeTransporterBlock
                 world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
             }
         }
+
+        // exclude current block from list
+
+        for (int i = 0; i < transporters.size(); i++) {
+            if (transporters.get(i).asLong() == pos.asLong()) {
+                transporters.remove(i);
+            }
+        }
+
         */
     }
 
