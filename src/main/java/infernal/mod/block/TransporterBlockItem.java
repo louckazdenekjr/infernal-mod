@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.Registries;
@@ -25,8 +26,6 @@ import java.util.Objects;
 
 
 public class TransporterBlockItem extends BlockItem implements Vanishable {
-    private static final Logger MY_LOGGER = LogUtils.getLogger();
-
     public TransporterBlockItem(Block block, Item.Settings settings) {
         super(block, settings);
     }
@@ -36,31 +35,34 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
         World world = context.getWorld();
         if (!world.getBlockState(blockPos).isOf(Blocks.TRANSPORTER)) {
             return super.useOnBlock(context);
-        } else { // if used on another transporter
-            context.getPlayer().playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
+        }
 
-            PlayerEntity playerEntity = context.getPlayer();
-            ItemStack itemStack = context.getStack();
+        // if used on another transporter
+        context.getPlayer().playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
 
-            boolean bl = !playerEntity.getAbilities().creativeMode && itemStack.getCount() == 1;
-            if (bl) { // last stack in survival
-                this.writeNbt(world.getRegistryKey(), blockPos, itemStack.getOrCreateNbt());
-            } else {
-                ItemStack itemStack2 = new ItemStack(Blocks.transporterBlockItem, 1);
-                NbtCompound nbtCompound = itemStack.hasNbt() ? itemStack.getNbt().copy() : new NbtCompound();
-                itemStack2.setNbt(nbtCompound);
-                if (!playerEntity.getAbilities().creativeMode) {
-                    // decrement stack in survival mode
-                    itemStack.decrement(1);
-                }
+        PlayerEntity playerEntity = context.getPlayer();
+        ItemStack itemStack = context.getStack();
 
-                // write nbt to new stack
-                this.writeNbt(world.getRegistryKey(), blockPos, nbtCompound);
+        // if last stack in survival
+        boolean bl = !playerEntity.getAbilities().creativeMode && itemStack.getCount() == 1;
+        if (bl) {
+            this.writeNbt(world.getRegistryKey(), blockPos, itemStack.getOrCreateNbt());
+            return ActionResult.success(world.isClient);
+        } else {
+            ItemStack itemStack2 = new ItemStack(Blocks.transporterBlockItem, 1);
+            NbtCompound nbtCompound = itemStack.hasNbt() ? itemStack.getNbt().copy() : new NbtCompound();
+            itemStack2.setNbt(nbtCompound);
+            if (!playerEntity.getAbilities().creativeMode) {
+                // decrement stack in survival mode
+                itemStack.decrement(1);
+            }
 
-                // drop new stack if it cannot be put into inventory
-                if (!playerEntity.getInventory().insertStack(itemStack2)) {
-                    playerEntity.dropItem(itemStack2, false);
-                }
+            // write nbt to new stack
+            this.writeNbt(world.getRegistryKey(), blockPos, nbtCompound);
+
+            // drop new stack if it cannot be put into inventory
+            if (!playerEntity.getInventory().insertStack(itemStack2)) {
+                playerEntity.dropItem(itemStack2, false);
             }
 
             return ActionResult.success(world.isClient);
@@ -68,13 +70,11 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
     }
 
     private void writeNbt(RegistryKey<World> worldKey, BlockPos pos, NbtCompound nbt) {
-        nbt.put("LodestonePos", NbtHelper.fromBlockPos(pos));
-        DataResult var10000 = World.CODEC.encodeStart(NbtOps.INSTANCE, worldKey);
-        Objects.requireNonNull(LOGGER);
-        var10000.resultOrPartial(LOGGER::error).ifPresent((nbtElement) -> {
-            nbt.put("LodestoneDimension", nbtElement);
+        DataResult<NbtElement> result = World.CODEC.encodeStart(NbtOps.INSTANCE, worldKey);
+        result.result().ifPresent(nbtElement -> {
+            nbt.put("TargetPos", NbtHelper.fromBlockPos(pos));
+            nbt.put("TargetDimension", nbtElement);
         });
-        nbt.putBoolean("LodestoneTracked", true);
     }
 
     /*
