@@ -3,5 +3,3 @@ accessible class net/minecraft/entity/mob/MobEntity
 accessible class net/minecraft/block/TrapdoorBlock
 accessible field net/minecraft/block/TrapdoorBlock blockSetType Lnet/minecraft/block/BlockSetType;
 accessible field net/minecraft/block/SlabBlock BOTTOM_SHAPE Lnet/minecraft/util/shape/VoxelShape;
-accessible class net/minecraft/item/Item
-accessible field net/minecraft/item/Item LOGGER Lorg/slf4j/Logger

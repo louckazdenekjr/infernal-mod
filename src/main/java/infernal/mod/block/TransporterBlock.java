@@ -1,10 +1,12 @@
 package infernal.mod.block;
 
 import net.minecraft.block.*;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
@@ -27,7 +29,9 @@ import org.jetbrains.annotations.Nullable;
 public class TransporterBlock extends Block {
     public static final DirectionProperty FACING;
     protected static final VoxelShape SHAPE;
-    private static final Text TITLE = Text.translatable("container.stonecutter");
+    private static final Text TITLE = Text.translatable("container.transporter");
+    public NbtCompound TARGET_POSITION = null;
+    public String TARGET_DIMENSION = null;
 
     static {
         FACING = HorizontalFacingBlock.FACING;
@@ -44,13 +48,46 @@ public class TransporterBlock extends Block {
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient) {
+        if (!world.isClient) { // server side
+            // if another teleporter in hand
             ItemStack heldItem = player.getStackInHand(hand);
             if (!heldItem.isEmpty() && heldItem.getItem() == Blocks.transporterBlockItem) {
                 return ActionResult.FAIL;
             }
+
+            player.sendMessage(Text.of("NBT Data:"));
+            player.sendMessage(Text.of(String.valueOf(TARGET_POSITION)));
+            player.sendMessage(Text.of(TARGET_DIMENSION));
+            player.sendMessage(Text.of(""));
+
+
+            // if the teleporter is linked
+            if (!TARGET_DIMENSION.isEmpty() && !TARGET_POSITION.isEmpty()) {
+                // TODO: implement world check
+                // TODO: implement both sided linking
+
+                // teleport player
+                player.sendMessage(Text.of("TELEPORTING:"));
+
+                double x = TARGET_POSITION.getInt("X") + 0.5;
+                double y = TARGET_POSITION.getInt("Y") + 0.5;
+                double z = TARGET_POSITION.getInt("Z") + 0.5;
+
+                player.sendMessage(Text.of(String.valueOf(x)));
+                player.sendMessage(Text.of(String.valueOf(y)));
+                player.sendMessage(Text.of(String.valueOf(z)));
+                player.sendMessage(Text.of(""));
+
+                player.teleport(x,y,z);
+
+                // play swing animation
+                return ActionResult.SUCCESS;
+            }
+
+
+            // otherwise
             return ActionResult.PASS;
-        } else {
+        } else { // client side
             //player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
             //player.incrementStat(Stats.INTERACT_WITH_STONECUTTER);
             //return ActionResult.CONSUME;
@@ -92,4 +129,20 @@ public class TransporterBlock extends Block {
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return false;
     }
+
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (!world.isClient) { // server side
+            NbtCompound nbt = itemStack.getOrCreateNbt();
+            setTransporterValues(
+                    nbt.getCompound("TargetPos"),
+                    nbt.getString("TargetDimension")
+            );
+        }
+    }
+
+    private void setTransporterValues(NbtCompound compound, String TargetDimension) {
+        TARGET_POSITION = compound;
+        TARGET_DIMENSION = TargetDimension;
+    }
+
 }

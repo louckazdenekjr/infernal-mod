@@ -140,7 +140,8 @@ public class ShortRangeTransporterBlock
     @Override
     protected void playToggleSound(@Nullable PlayerEntity player, World world, BlockPos pos, boolean open) {
         //world.playSound(player, pos, open ? this.blockSetType.trapdoorOpen() : this.blockSetType.trapdoorClose(), SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.1f + 0.9f);
-        world.playSound(player, pos, SoundEvent.of(SoundEvents.BLOCK_NOTE_BLOCK_BELL.value().getId()), SoundCategory.BLOCKS, 1.0f, 1.0f);
+        //world.playSound(player, pos, SoundEvent.of(SoundEvents.BLOCK_NOTE_BLOCK_BELL.value().getId()), SoundCategory.BLOCKS, 1.0f, 1.0f);
+        world.playSound(player, pos, SoundEvent.of(SoundEvents.ENTITY_ENDERMAN_TELEPORT.getId()), SoundCategory.BLOCKS, 1.0f, 0.5f);
         //world.emitGameEvent(player, open ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
     }
 
