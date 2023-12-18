@@ -4,14 +4,13 @@ import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.screen.StonecutterScreenHandler;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.BlockMirror;
@@ -44,18 +43,20 @@ public class TransporterBlock extends Block {
         return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
-    /*
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
-            return ActionResult.SUCCESS;
+            ItemStack heldItem = player.getStackInHand(hand);
+            if (!heldItem.isEmpty() && heldItem.getItem() == Blocks.transporterBlockItem) {
+                return ActionResult.FAIL;
+            }
+            return ActionResult.PASS;
         } else {
             //player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
             //player.incrementStat(Stats.INTERACT_WITH_STONECUTTER);
             //return ActionResult.CONSUME;
-            return ActionResult.SUCCESS;
+            return ActionResult.PASS;
         }
     }
-     */
 
     @Nullable
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {

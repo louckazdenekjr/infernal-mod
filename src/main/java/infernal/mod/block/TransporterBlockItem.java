@@ -1,8 +1,6 @@
 package infernal.mod.block;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.DataResult;
-import infernal.mod.item.Items;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -10,19 +8,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.slf4j.Logger;
-
-
-import java.util.Objects;
 
 
 public class TransporterBlockItem extends BlockItem implements Vanishable {
@@ -38,7 +28,7 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
         }
 
         // if used on another transporter
-        context.getPlayer().playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 1.4f);
+        context.getPlayer().playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 0.8f);
 
         PlayerEntity playerEntity = context.getPlayer();
         ItemStack itemStack = context.getStack();
