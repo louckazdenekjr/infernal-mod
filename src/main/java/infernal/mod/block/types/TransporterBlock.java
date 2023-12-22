@@ -10,13 +10,10 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.screen.StonecutterScreenHandler;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.Text;
@@ -64,40 +61,8 @@ public class TransporterBlock extends BlockWithEntity {
             if (blockEntity instanceof TransporterBlockEntity) {
                 ((TransporterBlockEntity) blockEntity).teleportPlayer(player);
             }
-
-
-            // if the teleporter is linked
-            /*
-            if (!TARGET_DIMENSION.isEmpty() && !TARGET_POSITION.isEmpty()) {
-                // TODO: implement world check
-                // TODO: implement both sided linking
-
-                // teleport player
-                player.sendMessage(Text.of("TELEPORTING:"));
-
-                double x = TARGET_POSITION.getInt("X") + 0.5;
-                double y = TARGET_POSITION.getInt("Y") + 0.5;
-                double z = TARGET_POSITION.getInt("Z") + 0.5;
-
-                player.sendMessage(Text.of(String.valueOf(x)));
-                player.sendMessage(Text.of(String.valueOf(y)));
-                player.sendMessage(Text.of(String.valueOf(z)));
-                player.sendMessage(Text.of(""));
-
-                player.teleport(x, y, z);
-
-                // play swing animation
-                return ActionResult.SUCCESS;
-            }
-             */
-
-
-            // otherwise
-            return ActionResult.PASS;
+            return ActionResult.SUCCESS; // TODO: implement hand animations relative to actions
         } else { // client side
-            //player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
-            //player.incrementStat(Stats.INTERACT_WITH_STONECUTTER);
-            //return ActionResult.CONSUME;
             return ActionResult.PASS;
         }
     }
@@ -139,42 +104,19 @@ public class TransporterBlock extends BlockWithEntity {
 
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
             NbtCompound nbt = itemStack.getOrCreateNbt();
-            setTransporterValues(
-                    world,
-                    pos,
-                    placer,
-                    nbt
-            );
+            setEntityValues(world, pos, placer, nbt);
         }
 
-    private void setTransporterValues(World world, BlockPos pos, LivingEntity placer, NbtCompound nbt) {
-        if (world.isClient) { // client side
-            //world.playSound(
-            //        (double) pos.getX(),
-            //        (double) pos.getY(),
-            //        (double) pos.getZ(),
-            //        SoundEvents.BLOCK_PISTON_EXTEND,
-            //        SoundCategory.MASTER,
-            //        1.0f,
-            //        1.0f,
-            //        false
-            //);
-            //placer.sendMessage(Text.of("CLIENT TRYING TO DO STUFF"));
-        } else { // server side
+    private void setEntityValues(World world, BlockPos pos, LivingEntity placer, NbtCompound nbt) {
+        if (!world.isClient) { // server side
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof TransporterBlockEntity) {
                 NbtCompound TARGET_POSITION = nbt.getCompound("TargetPos");
-                double x = TARGET_POSITION.getInt("X") + 0.5;
-                double y = TARGET_POSITION.getInt("Y") + 0.5;
-                double z = TARGET_POSITION.getInt("Z") + 0.5;
-
                 NbtElement TARGET_DIMENSION = nbt.get("TargetDimension");
-
-                ((TransporterBlockEntity) blockEntity).acceptParameter(x,y,z,TARGET_DIMENSION);
+                ((TransporterBlockEntity) blockEntity).attemptPairing(TARGET_POSITION, TARGET_DIMENSION, (PlayerEntity) placer);
             }
         }
     }
-
 
     @Nullable
     @Override
