@@ -104,19 +104,32 @@ public class TransporterBlock extends BlockWithEntity {
 
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
             NbtCompound nbt = itemStack.getOrCreateNbt();
-            setEntityValues(world, pos, placer, nbt);
+            setEntityValues(world, pos, nbt);
         }
 
-    private void setEntityValues(World world, BlockPos pos, LivingEntity placer, NbtCompound nbt) {
+    private void setEntityValues(World world, BlockPos pos, NbtCompound nbt) {
         if (!world.isClient) { // server side
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof TransporterBlockEntity) {
-                NbtCompound TARGET_POSITION = nbt.getCompound("TargetPos");
-                NbtElement TARGET_DIMENSION = nbt.get("TargetDimension");
-                ((TransporterBlockEntity) blockEntity).attemptPairing(TARGET_POSITION, TARGET_DIMENSION, (PlayerEntity) placer);
+                boolean INSCRIBED = nbt.getBoolean("Inscribed");
+                if (INSCRIBED) {
+                    NbtCompound TARGET_POSITION = nbt.getCompound("TargetPos");
+                    NbtElement TARGET_DIMENSION = nbt.get("TargetDimension");
+                    ((TransporterBlockEntity) blockEntity).attemptPairing(TARGET_POSITION, TARGET_DIMENSION);
+                }
             }
         }
     }
+
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        // do entity unlinking
+        // TODO: onBreak unlink both entities
+
+        // call super on break
+        super.onBreak(world, pos, state, player);
+    }
+
 
     @Nullable
     @Override

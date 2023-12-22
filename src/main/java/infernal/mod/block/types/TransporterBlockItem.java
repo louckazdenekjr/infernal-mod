@@ -24,6 +24,8 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
     public ActionResult useOnBlock(ItemUsageContext context) {
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
+
+        // use block unless holding a transporter
         if (!world.getBlockState(blockPos).isOf(Blocks.TRANSPORTER)) {
             return super.useOnBlock(context);
         }
@@ -61,10 +63,14 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
     }
 
     private void writeNbt(RegistryKey<World> worldKey, BlockPos pos, NbtCompound nbt) {
+        // get dimension
         DataResult<NbtElement> result = World.CODEC.encodeStart(NbtOps.INSTANCE, worldKey);
+
+        // write nbt data
         result.result().ifPresent(nbtElement -> {
             nbt.put("TargetPos", NbtHelper.fromBlockPos(pos));
             nbt.put("TargetDimension", nbtElement);
+            nbt.putBoolean("Inscribed", true);
         });
     }
 
