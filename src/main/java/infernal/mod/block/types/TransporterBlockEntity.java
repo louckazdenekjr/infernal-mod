@@ -60,6 +60,7 @@ public class TransporterBlockEntity extends BlockEntity {
             }
             // send pairing request
             if (((TransporterBlockEntity) blockEntity).processPairingRequest(
+                    // TODO: offset should be handled in the entity teleport method entirely
                     pos.getX() + 0.5,
                     pos.getY() + 0.5,
                     pos.getZ() + 0.5
@@ -79,11 +80,45 @@ public class TransporterBlockEntity extends BlockEntity {
             return false;
         }
 
-        this.target_x = linker_x;
-        this.target_y = linker_y;
-        this.target_z = linker_z;
-        this.paired = true;
-        return true;
+        long linkerLong = pos.asLong();
+        long targetLong = new BlockPos(
+                (int) (linker_x - 0.5),
+                (int) (linker_y - 0.5),
+                (int) (linker_z - 0.5)
+        ).asLong();
+
+        if (linkerLong != targetLong) {
+            this.target_x = linker_x;
+            this.target_y = linker_y;
+            this.target_z = linker_z;
+            this.paired = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void processUnpairingRequest() {
+        if (this.paired) {
+            // get target entity
+            BlockPos targetPos = new BlockPos( // TODO: get rid of manual offset?
+                    (int) (this.target_x - 0.5),
+                    (int) (this.target_y - 0.5),
+                    (int) (this.target_z - 0.5)
+            );
+            BlockEntity blockEntity = getWorld().getBlockEntity(targetPos);
+            if (blockEntity instanceof TransporterBlockEntity) {
+                // unpair current entity
+                this.paired = false;
+
+                // unpair target entity
+                ((TransporterBlockEntity) blockEntity).setPaired(false);
+            }
+        }
+    }
+
+    public void setPaired(boolean newState) {
+        this.paired = newState;
     }
 
     public void teleportPlayer(PlayerEntity player) {

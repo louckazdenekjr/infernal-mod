@@ -53,7 +53,7 @@ public class TransporterBlock extends BlockWithEntity {
             // if another teleporter in hand
             ItemStack heldItem = player.getStackInHand(hand);
             if (!heldItem.isEmpty() && heldItem.getItem() == Blocks.transporterBlockItem) {
-                return ActionResult.FAIL;
+                return ActionResult.PASS;
                 // FAIL goes to item actions
             }
 
@@ -61,9 +61,11 @@ public class TransporterBlock extends BlockWithEntity {
             if (blockEntity instanceof TransporterBlockEntity) {
                 ((TransporterBlockEntity) blockEntity).teleportPlayer(player);
             }
-            return ActionResult.SUCCESS; // TODO: implement hand animations relative to actions
-        } else { // client side
             return ActionResult.PASS;
+
+        } else { // client side
+            // always play animation..?
+            return ActionResult.SUCCESS;
         }
     }
 
@@ -125,6 +127,12 @@ public class TransporterBlock extends BlockWithEntity {
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         // do entity unlinking
         // TODO: onBreak unlink both entities
+        if (!world.isClient) { // server side
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof TransporterBlockEntity) {
+                ((TransporterBlockEntity) blockEntity).processUnpairingRequest();
+            }
+        }
 
         // call super on break
         super.onBreak(world, pos, state, player);
