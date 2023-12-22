@@ -49,22 +49,28 @@ public class TransporterBlock extends BlockWithEntity {
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        // FIXME animation and sound conditions are not clearly defined
+        // is another transporter in hand?
+        ItemStack heldItem = player.getStackInHand(hand);
+        boolean transporterInHand = !heldItem.isEmpty() && heldItem.getItem() == Blocks.transporterBlockItem;
         if (!world.isClient) { // server side
-            // if another teleporter in hand
-            ItemStack heldItem = player.getStackInHand(hand);
-            if (!heldItem.isEmpty() && heldItem.getItem() == Blocks.transporterBlockItem) {
-                return ActionResult.PASS;
-                // FAIL goes to item actions
+            if (transporterInHand) {
+                return ActionResult.FAIL; // FAIL goes to item actions
             }
 
+            // get own block entity and activate teleportation
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof TransporterBlockEntity) {
                 ((TransporterBlockEntity) blockEntity).teleportPlayer(player);
             }
-            return ActionResult.PASS;
+            return ActionResult.SUCCESS;
 
         } else { // client side
-            // always play animation..?
+            if (transporterInHand) {
+                return ActionResult.FAIL; // FAIL goes to item actions
+            }
+
+            // play animation, should not be PASS, gives block placement sound
             return ActionResult.SUCCESS;
         }
     }
@@ -126,7 +132,6 @@ public class TransporterBlock extends BlockWithEntity {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         // do entity unlinking
-        // TODO: onBreak unlink both entities
         if (!world.isClient) { // server side
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof TransporterBlockEntity) {
@@ -148,3 +153,4 @@ public class TransporterBlock extends BlockWithEntity {
         return blockEntity;
     }
 }
+// TODO: register mining speed and drops itself

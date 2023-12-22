@@ -76,7 +76,7 @@ public class TransporterBlockEntity extends BlockEntity {
 
     public boolean processPairingRequest(double linker_x, double linker_y, double linker_z) {
         if (this.paired) {
-            // TODO: if it is paired, do nothing and play failure sound
+            // TODO: if it's already paired, play failure sound
             return false;
         }
 
@@ -128,3 +128,11 @@ public class TransporterBlockEntity extends BlockEntity {
     }
 
 }
+
+/* TODO
+1. play pairing sound on successful pairing
+--?. play failure sound on failed pairing
+3. play teleport sound on teleporting
+--?. play failure sound if clicked transporter is not linked
+4. play unpairing sound on unpairing?
+ */

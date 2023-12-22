@@ -24,6 +24,8 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
     public ActionResult useOnBlock(ItemUsageContext context) {
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
+        PlayerEntity player = context.getPlayer();
+        boolean creativeMode = player.getAbilities().creativeMode;
 
         // use block unless holding a transporter
         if (!world.getBlockState(blockPos).isOf(Blocks.TRANSPORTER)) {
@@ -33,29 +35,42 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
         // if used on another transporter
         context.getPlayer().playSound(SoundEvents.BLOCK_BELL_USE, 1.0f, 0.8f);
 
-        PlayerEntity playerEntity = context.getPlayer();
         ItemStack itemStack = context.getStack();
 
         // if last stack in survival
-        boolean bl = !playerEntity.getAbilities().creativeMode && itemStack.getCount() == 1;
-        if (bl) {
-            this.writeNbt(world.getRegistryKey(), blockPos, itemStack.getOrCreateNbt());
-            return ActionResult.success(world.isClient);
-        } else {
+        boolean lastInStack = itemStack.getCount() == 1;
+        if (!creativeMode) { // survival mode
+            if (lastInStack) {
+                this.writeNbt(world.getRegistryKey(), blockPos, itemStack.getOrCreateNbt());
+                return ActionResult.success(world.isClient);
+            }
+
             ItemStack itemStack2 = new ItemStack(Blocks.transporterBlockItem, 1);
             NbtCompound nbtCompound = itemStack.hasNbt() ? itemStack.getNbt().copy() : new NbtCompound();
             itemStack2.setNbt(nbtCompound);
-            if (!playerEntity.getAbilities().creativeMode) {
-                // decrement stack in survival mode
-                itemStack.decrement(1);
-            }
+            // decrement stack in survival mode
+            itemStack.decrement(1);
 
             // write nbt to new stack
             this.writeNbt(world.getRegistryKey(), blockPos, nbtCompound);
 
             // drop new stack if it cannot be put into inventory
-            if (!playerEntity.getInventory().insertStack(itemStack2)) {
-                playerEntity.dropItem(itemStack2, false);
+            if (!player.getInventory().insertStack(itemStack2)) {
+                player.dropItem(itemStack2, false);
+            }
+
+            return ActionResult.success(world.isClient);
+        } else { // creative mode
+            ItemStack itemStack2 = new ItemStack(Blocks.transporterBlockItem, 1);
+            NbtCompound nbtCompound = itemStack.hasNbt() ? itemStack.getNbt().copy() : new NbtCompound();
+            itemStack2.setNbt(nbtCompound);
+
+            // write nbt to new stack
+            this.writeNbt(world.getRegistryKey(), blockPos, nbtCompound);
+
+            // drop new stack if it cannot be put into inventory
+            if (!player.getInventory().insertStack(itemStack2)) {
+                player.dropItem(itemStack2, false);
             }
 
             return ActionResult.success(world.isClient);
