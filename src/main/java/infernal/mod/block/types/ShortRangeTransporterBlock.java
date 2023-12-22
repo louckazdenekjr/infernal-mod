@@ -1,5 +1,6 @@
-package infernal.mod.block;
+package infernal.mod.block.types;
 
+import infernal.mod.block.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.BlockState;

@@ -13,8 +13,8 @@ public class Models {
 
     private static ModelIdentifier registerModel(Identifier pathId) {
         ModelIdentifier modelId = new ModelIdentifier(
-             pathId,
-            "inventory"
+                pathId,
+                "inventory"
         );
 
         ModelLoadingRegistry.INSTANCE.registerAppender((resourceManager, consumer) -> {

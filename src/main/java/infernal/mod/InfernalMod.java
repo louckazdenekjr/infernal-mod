@@ -1,6 +1,7 @@
 package infernal.mod;
 
 
+import infernal.mod.block.BlockEntities;
 import infernal.mod.block.Blocks;
 import infernal.mod.item.ItemGroups;
 import infernal.mod.item.Items;
@@ -27,6 +28,7 @@ public class InfernalMod implements ModInitializer {
         ItemGroups.registerItemGroups();
         Items.registerModItems();
         Blocks.registerModBlocks();
+        BlockEntities.registerModBlockEntities();
         SoundEvents.registerModSoundEvents();
 
         LOGGER.info("Initializing Infernal Mod.");

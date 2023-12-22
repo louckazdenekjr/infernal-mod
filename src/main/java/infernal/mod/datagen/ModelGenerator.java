@@ -5,9 +5,9 @@ import infernal.mod.block.Blocks;
 import infernal.mod.item.Items;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Block;
-import net.minecraft.data.client.*;
-import net.minecraft.util.Identifier;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Models;
 
 
 public class ModelGenerator extends FabricModelProvider {
@@ -31,9 +31,9 @@ public class ModelGenerator extends FabricModelProvider {
         //blockStateModelGenerator.registerCubeAllModelTexturePool(Blocks.TRANSPORTER);
         //
         //TexturedModel transporterModel = blockStateModelGenerator.texturedModels.getOrDefault(
-                //        Blocks.TRANSPORTER,
+        //        Blocks.TRANSPORTER,
         //        TexturedModel.CUBE_ALL.get(Blocks.TRANSPORTER)
-                //);
+        //);
         //
         //new BlockStateModelGenerator.BlockTexturePool(transporterModel.getTextures())).base(Blocks.TRANSPORTER, transporterModel.getModel();
 

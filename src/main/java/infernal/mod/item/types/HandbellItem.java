@@ -1,4 +1,4 @@
-package infernal.mod.item;
+package infernal.mod.item.types;
 
 import infernal.mod.sound.SoundEvents;
 import net.minecraft.entity.passive.TameableEntity;

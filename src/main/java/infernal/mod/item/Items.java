@@ -1,6 +1,7 @@
 package infernal.mod.item;
 
 import infernal.mod.InfernalMod;
+import infernal.mod.item.types.HandbellItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -36,7 +37,7 @@ public class Items {
 
 
     public static void registerModItems() {
-        InfernalMod.LOGGER.info("Registering Mod Items for " + InfernalMod.MOD_ID);
+        InfernalMod.LOGGER.info("Registering Items");
         addItemsToItemGroup();
     }
 }

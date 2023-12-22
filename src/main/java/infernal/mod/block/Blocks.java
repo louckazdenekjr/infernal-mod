@@ -1,5 +1,8 @@
 package infernal.mod.block;
 
+import infernal.mod.block.types.ShortRangeTransporterBlock;
+import infernal.mod.block.types.TransporterBlock;
+import infernal.mod.block.types.TransporterBlockItem;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -129,8 +132,9 @@ public class Blocks {
         return Registry.register(BLOCK, new Identifier(MOD_ID, name), block);
     }
 
+
     public static void registerModBlocks() {
-        LOGGER.info("Registering ModBlocks");
+        LOGGER.info("Registering Blocks");
     }
 
     public static void registerTransparentBlocks() {
