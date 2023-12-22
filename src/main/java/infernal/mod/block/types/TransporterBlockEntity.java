@@ -121,6 +121,20 @@ public class TransporterBlockEntity extends BlockEntity {
         this.paired = newState;
     }
 
+    public int[] getTargetCoordinates() {
+        if (this.paired) {
+            return new int[] {
+                    // TODO: fix offset
+                    (int) (this.target_x - 0.5),
+                    (int) (this.target_y - 0.5),
+                    (int) (this.target_z - 0.5)
+            };
+        }
+        else {
+            return null;
+        }
+    }
+
     public void teleportPlayer(PlayerEntity player) {
         if (this.paired) {
             player.teleport(this.target_x, this.target_y, this.target_z);

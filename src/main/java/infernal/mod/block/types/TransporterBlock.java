@@ -14,6 +14,8 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.screen.StonecutterScreenHandler;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.Text;
@@ -53,26 +55,54 @@ public class TransporterBlock extends BlockWithEntity {
         // is another transporter in hand?
         ItemStack heldItem = player.getStackInHand(hand);
         boolean transporterInHand = !heldItem.isEmpty() && heldItem.getItem() == Blocks.transporterBlockItem;
-        if (!world.isClient) { // server side
-            if (transporterInHand) {
-                return ActionResult.FAIL; // FAIL goes to item actions
-            }
 
-            // get own block entity and activate teleportation
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof TransporterBlockEntity) {
-                ((TransporterBlockEntity) blockEntity).teleportPlayer(player);
-            }
-            return ActionResult.SUCCESS;
-
-        } else { // client side
-            if (transporterInHand) {
-                return ActionResult.FAIL; // FAIL goes to item actions
-            }
-
-            // play animation, should not be PASS, gives block placement sound
-            return ActionResult.SUCCESS;
+        // can own entity be found
+        boolean shouldTeleport = false;
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof TransporterBlockEntity) {
+            // TODO: check that own entity is paired
+            shouldTeleport = true;
         }
+
+        if (transporterInHand) {
+            return ActionResult.FAIL; // FAIL goes to item actions
+        }
+
+        if (shouldTeleport) {
+            //player.playSound();
+            //player.playSound(SoundEvents.ENTITY_ELDER_GUARDIAN_AMBIENT, SoundCategory.MASTER, 1.0f, 0.8f);
+
+            // play sound at own position
+            world.playSound(
+                pos.getX(),
+                pos.getY(),
+                pos.getZ(),
+                SoundEvents.ENTITY_ELDER_GUARDIAN_AMBIENT,
+                SoundCategory.BLOCKS,
+                1.0f,
+                0.8f,
+                true
+            );
+
+            // play sound at target position
+            //int[] targetCoordinates = ((TransporterBlockEntity) blockEntity).getTargetCoordinates();
+            //player.sendMessage(Text.of(targetCoordinates.toString()));
+            //world.playSound(
+            //    targetCoordinates[0],
+            //    targetCoordinates[1],
+            //    targetCoordinates[2],
+            //    SoundEvents.ENTITY_ELDER_GUARDIAN_AMBIENT,
+            //    SoundCategory.BLOCKS,
+            //    1.0f,
+            //    0.8f,
+            //    true
+            //);
+
+            ((TransporterBlockEntity) blockEntity).teleportPlayer(player);
+        }
+        // play animation, should not be PASS - gives block placement sound
+        return ActionResult.success(world.isClient());
+
     }
 
     @Nullable
