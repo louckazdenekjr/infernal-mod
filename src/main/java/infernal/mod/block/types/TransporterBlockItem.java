@@ -105,6 +105,13 @@ public class TransporterBlockItem extends BlockItem implements Vanishable {
 
      */
 
+    @Override
+    public boolean hasGlint(ItemStack stack) {
+        NbtCompound nbt = stack.hasNbt() ? stack.getNbt().copy() : new NbtCompound();
+        boolean Inscribed = nbt.getBoolean("Inscribed");
+        return Inscribed;
+    }
+
     /*
     public ActionResult place(ItemPlacementContext context) {
         World world = context.getWorld();
