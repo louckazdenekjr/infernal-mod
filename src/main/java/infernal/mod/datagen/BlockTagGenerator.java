@@ -27,13 +27,15 @@ public class BlockTagGenerator extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.BEJEWELED_STONE_BRICKS)
                 .add(Blocks.POLISHED_TERRACOTTA)
                 .add(Blocks.BEJEWELED_TERRACOTTA)
-                .add(Blocks.SHORT_RANGE_TRANSPORTER);
+                .add(Blocks.SHORT_RANGE_TRANSPORTER)
+                .add(Blocks.TRANSPORTER);
         // TODO: remove explicit tags from blocks that inherit properties
 
         // wooden tool level is implied
         // other tool levels assigned here
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
-                .add(Blocks.SHORT_RANGE_TRANSPORTER);
+                .add(Blocks.SHORT_RANGE_TRANSPORTER)
+                .add(Blocks.TRANSPORTER);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(Blocks.BEJEWELED_DEEPSLATE);

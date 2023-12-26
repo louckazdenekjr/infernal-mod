@@ -85,18 +85,20 @@ public class TransporterBlock extends BlockWithEntity {
             );
 
             // play sound at target position
-            //int[] targetCoordinates = ((TransporterBlockEntity) blockEntity).getTargetCoordinates();
-            //player.sendMessage(Text.of(targetCoordinates.toString()));
-            //world.playSound(
-            //    targetCoordinates[0],
-            //    targetCoordinates[1],
-            //    targetCoordinates[2],
-            //    SoundEvents.ENTITY_ELDER_GUARDIAN_AMBIENT,
-            //    SoundCategory.BLOCKS,
-            //    1.0f,
-            //    0.8f,
-            //    true
-            //);
+            /*
+            int[] targetCoordinates = ((TransporterBlockEntity) blockEntity).getTargetCoordinates();
+            player.sendMessage(Text.of(targetCoordinates.toString()));
+            world.playSound(
+                targetCoordinates[0],
+                targetCoordinates[1],
+                targetCoordinates[2],
+                SoundEvents.ENTITY_ELDER_GUARDIAN_AMBIENT,
+                SoundCategory.BLOCKS,
+                1.0f,
+                0.8f,
+                true
+            );
+            */
 
             ((TransporterBlockEntity) blockEntity).teleportPlayer(player);
         }

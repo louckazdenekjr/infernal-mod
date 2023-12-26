@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "infernal-mod:short_range_transporter"
+    "infernal-mod:short_range_transporter",
+    "infernal-mod:transporter"
   ]
 }

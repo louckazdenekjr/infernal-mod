@@ -24,6 +24,8 @@ public class LootTableGenerator extends FabricBlockLootTableProvider {
         addDrop(Blocks.POLISHED_TERRACOTTA);
         addDrop(Blocks.BEJEWELED_TERRACOTTA);
         addDrop(Blocks.SHORT_RANGE_TRANSPORTER);
+        addDrop(Blocks.TRANSPORTER);
+
 
         // with and without silk touch
         //addDrop(ModBlocks.CITRINE_ORE, oreDrops(ModBlocks.CITRINE_ORE, ModItems.RAW_CITRINE));
