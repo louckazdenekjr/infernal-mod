@@ -13,6 +13,6 @@ public class SoundEvents {
     }
 
     public static void registerModSoundEvents() {
-        InfernalMod.LOGGER.info("Registering ModSoundEvents");
+        InfernalMod.LOGGER.info("Registering Sound Events");
     }
 }

@@ -6,6 +6,7 @@ import infernal.mod.block.Blocks;
 import infernal.mod.item.ItemGroups;
 import infernal.mod.item.Items;
 import infernal.mod.sound.SoundEvents;
+import infernal.mod.village.Trades;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ public class InfernalMod implements ModInitializer {
         Blocks.registerModBlocks();
         BlockEntities.registerModBlockEntities();
         SoundEvents.registerModSoundEvents();
+        Trades.registerModTrades();
 
         LOGGER.info("Initializing Infernal Mod.");
     }
