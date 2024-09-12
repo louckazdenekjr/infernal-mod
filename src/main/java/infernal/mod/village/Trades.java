@@ -38,4 +38,4 @@ public class Trades {
         InfernalMod.LOGGER.info("Registering Trades");
         registerCustomTrade();
     }
-}
+} //
